@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Nyambo dzinokodza mwoyo";
+}
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Bootstrap4.Core
+@model Curate.Data.ViewModels.NyamboListViewModel
+<div class="pb-2 mb-2 mb-md-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb u-breadcrumb  pt-3 px-0 mb-0 bg-transparent small">
+                    <a class="breadcrumb-item" href="@Url.Content("~/")">Curate</a>&nbsp;&nbsp;»&nbsp;&nbsp;<a href="@Url.Content("~/nyambo")">Nyambo</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 text-center mt-4">
+            <div class="category-title">
+                <h1 class="h2 h1-md">Tag: <span>Nyambo dzinokodza mwoyo</span></h1>
+                <hr class="hr-after">
+            </div>
+        </div>
+    </div >
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            @foreach (var nyambo in Model.PagedList)
+            {
+                <partial name="Nyambo/_Nyambo" model="nyambo" />
+            }
+            @Html.PagedListPager(Model.PagedList, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+            <div class="gap-2"></div>
+        </div>
+        <partial name="Asides/_NyamboAside" />
+    </div>
+</div>
+

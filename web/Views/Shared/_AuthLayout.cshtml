@@ -1,0 +1,32 @@
+﻿@using Curate.Web.Views.Shared.Components.Header
+@using Curate.Web.Views.Shared.Components.Footer
+@{
+    var pageTitle = "The best of Zimbabwean Content";
+        if (!string.IsNullOrWhiteSpace((string)ViewData["Title"]))
+        {
+            pageTitle = (string)ViewData["Title"]; 
+        }
+     var bodyClass = (string)ViewData["bodyClass"];
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@pageTitle - CurateZW</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    @await Html.PartialAsync("_Styles.cshtml")
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="hold-transition @bodyClass">
+     @RenderBody()
+    @await Html.PartialAsync("_Scripts.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿
+@model Curate.Data.ViewModels.TagViewModel
+
+
+<div class="pb-2 mb-2 mb-md-4">
+    <div class="container">
+        <div class="row">
+            <!--Breadcrumb-->
+            <div class="col-12">
+                <div class="breadcrumb u-breadcrumb  pt-3 px-0 mb-0 bg-transparent small">
+                    <a class="breadcrumb-item" href="@Url.Content("~/")">Curate</a>&nbsp;&nbsp;»&nbsp;&nbsp;<a href="@Url.Content("~/nyambo")">Nyambo</a>
+                </div>
+            </div>
+
+            <!--category title-->
+            <div class="col-12 text-center mt-4">
+                <div class="category-title">
+                    <h1 class="h2 h1-md">Tag: <span>@Model.Title</span></h1>				        <hr class="hr-after">
+                    <div>
+                        <a target="_blank" href="http://twitter.com/intent/tweet?original_referer=curate.co.zw&url=@Model.HtmlEncodedUrl"><i class="fab fa-twitter"></i></a>
+                        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=@Model.HtmlEncodedUrl"><i class="fab fa-facebook"></i></a>
+                        <a target="_blank" href="https://api.whatsapp.com/send/?phone&text=@Model.HtmlEncodedUrl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            @foreach (var nyambo in Model.NyamboList)
+            {
+                <partial name="Nyambo/_Nyambo" model="nyambo" />
+            }
+            <div class="gap-2"></div>
+        </div>
+        <partial name="Asides/_NyamboAside"/>
+    </div>
+</div>
+

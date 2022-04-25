@@ -1,0 +1,41 @@
+﻿
+@model Curate.Data.Models.RssFeed
+@{
+    Layout = "";
+}
+<ul>
+    <h1>@Model.Title</h1>
+    @foreach (var feed in @Model.RssFeedArticles)
+    {
+        <li>
+            <div>
+                <h3>@feed.Title</h3>
+                <p>@feed.Body</p>
+                <p>@feed.Url</p>
+                <p>@feed.PublishDate</p>
+            </div>
+        </li>
+        <hr />
+    }
+</ul>
+
+@*$.each(response, function (i, item) {
+
+var contentId = 'article' + item.id;
+
+var font = 'font-weight: bold';
+if (item.read) font = 'font-weight: normal';
+var text = '<div id="articlehead' + item.id +'" style="cursor:pointer;' + font + '"onclick="markAsRead(this,' + item.id + ');  showOrHide(\'' + contentId + '\');' + '">';
+    text += item.title;
+    text += "&nbsp;";
+    text += '<a href="' + item.link + '" target="_blank">';
+        text += '<span class="glyphicon glyphicon-share-alt"></span>';
+        text += "</a>"
+    text += "</div>";
+text += '<div style="display:none" id="' + contentId + '"> ';
+    if (item.content > '') {
+    text += item.content;
+    }
+    text +=  '</div>';
+$('#tblArticles').append('<tr><td>' + text + "</td></tr>");
+});*@

@@ -1,0 +1,35 @@
+﻿@using Curate.Web.Views.Shared.Components.Sidebar
+@using Curate.Web.Views.Shared.Components.ControlSidebar
+@using Curate.Web.Views.Shared.Components.Footer
+@using Curate.Web.Views.Shared.Components.AdminHeader
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Curate Admin | @ViewData["Title"]</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    @await Html.PartialAsync("~/Views/Shared/_Styles.cshtml")
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @(await Component.InvokeAsync<AdminHeaderViewComponent>())
+        @(await Component.InvokeAsync<SidebarViewComponent>())
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        @(await Component.InvokeAsync<ControlSidebarViewComponent>())
+        @(await Component.InvokeAsync<FooterViewComponent>())
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/_Scripts.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

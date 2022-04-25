@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Robert subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Blogs - Food" title="Blogs - Food" subtypeid="4">
+            <outline type="rss" text="ZimboKitchen" title="ZimboKitchen" xmlUrl="https://www.zimbokitchen.com/feed/" htmlUrl="https://www.zimbokitchen.com"/>
+            <outline type="rss" text="Ivy's Kitchenette (A Taste of Zimbabwe)" title="Ivy's Kitchenette (A Taste of Zimbabwe)" xmlUrl="https://atasteozimboivyskitchenette.com/feed/" htmlUrl="https://atasteozimboivyskitchenette.com"/>
+            <outline type="rss" text="PrincessTafadzwa" title="PrincessTafadzwa" xmlUrl="https://www.princesstafadzwa.com/feed/" htmlUrl="https://www.princesstafadzwa.com"/>
+        </outline>
+        <outline text="Videos - Interviews" title="Videos - Interviews" subtypeid="15">
+            <outline type="rss" text="Centre for Innovation &amp; Technology" title="Centre for Innovation &amp; Technology" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCksaANJdN739zAMRapwxB1Q" htmlUrl="https://www.youtube.com/channel/UCksaANJdN739zAMRapwxB1Q"/>
+            <outline type="rss" text=" ZTN" title=" ZTN" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCYhEQp1ZItUXsr_qKOKSr-w" htmlUrl="https://www.youtube.com/channel/UCYhEQp1ZItUXsr_qKOKSr-w"/>
+            <outline type="rss" text="Ruvheneko" title="Ruvheneko" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC1FhQChsw7u0wT_I0G3JqbA" htmlUrl="https://www.youtube.com/channel/UC1FhQChsw7u0wT_I0G3JqbA"/>
+            <outline type="rss" text="So Profound" title="So Profound" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCLwTlMJyLAmDrVNFlgyzTlw" htmlUrl="https://www.youtube.com/channel/UCLwTlMJyLAmDrVNFlgyzTlw"/>
+            <outline type="rss" text="Power FM Zimbabwe" title="Power FM Zimbabwe" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCMCEOMIHs-ZUFzUaI6oSaHw" htmlUrl="https://www.youtube.com/channel/UCMCEOMIHs-ZUFzUaI6oSaHw"/>
+            <outline type="rss" text="GAMBAKWE" title="GAMBAKWE" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCA3ZrOOeVLbRwEwO0WzohkA" htmlUrl="https://www.youtube.com/channel/UCA3ZrOOeVLbRwEwO0WzohkA"/>
+            <outline type="rss" text="In Conversation with Trevor" title="In Conversation with Trevor" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCNbc67sxB15OjthponRC-Ug" htmlUrl="https://www.youtube.com/channel/UCNbc67sxB15OjthponRC-Ug"/>
+            <outline type="rss" text="Karanganda Tv" title="Karanganda Tv" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCu3slF78lXBStn7L7YN24Ig" htmlUrl="https://www.youtube.com/channel/UCu3slF78lXBStn7L7YN24Ig"/>
+        </outline>
+        <outline text="Podcasts - Entertainment" title="Podcasts - Entertainment" subtypeid="11">
+            <outline type="rss" text="Sadza In The Morning" title="Sadza In The Morning" xmlUrl="https://iono.fm/rss/chan/3181?quality=high" htmlUrl="https://www.madhorofiyarepublik.com"/>
+            <outline type="rss" text="#zimlove" title="#zimlove" xmlUrl="https://podcast4afec5.podigee.io/feed/mp3" htmlUrl="https://podcast4afec5.podigee.io/"/>
+            <outline type="rss" text="Girl In Skies" title="Girl In Skies" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCUP9ZLJziXH_h53Ht12cRhQ" htmlUrl="https://www.youtube.com/channel/UCUP9ZLJziXH_h53Ht12cRhQ"/>
+        </outline>
+        <outline text="Podcasts - Interviews" title="Podcasts - Interviews" subtypeid="9">
+            <outline type="rss" text="Technikari - a Techzim podcast" title="Technikari - a Techzim podcast" xmlUrl="https://pinecast.com/feed/techzim-podcast" htmlUrl="https://techzim-podcast.pinecast.co"/>
+            <outline type="rss" text="Tisu Vanhu Vacho - a Techzim podcast" title="Tisu Vanhu Vacho - a Techzim podcast" xmlUrl="https://pinecast.com/feed/tisu-vanhu-vacho-a-techzim-pod" htmlUrl="https://www.techzim.co.zw/"/>
+            <outline type="rss" text="Khulumani FM » Feed" title="Khulumani FM » Feed" xmlUrl="https://www.khulumanifm.co.zw/feed/" htmlUrl="https://www.khulumanifm.co.zw"/>
+        </outline>
+        <outline text="Sites - NGO" title="Sites - NGO" subtypeid="21">
+            <outline type="rss" text="British Council - Zimbabwe" title="British Council - Zimbabwe" xmlUrl="https://www.britishcouncil.co.zw/rss.xml" htmlUrl="https://www.britishcouncil.co.zw/rss.xml"/>
+            <outline type="rss" text="veritaszim RSS" title="veritaszim RSS" xmlUrl="https://www.veritaszim.net/rss.xml" htmlUrl="https://www.veritaszim.net"/>
+            <outline type="rss" text="Kubatana.net » Feed" title="Kubatana.net » Feed" xmlUrl="https://kubatana.net/feed/" htmlUrl="https://kubatana.net"/>
+            <outline type="rss" text="MISA Zimbabwe" title="MISA Zimbabwe" xmlUrl="https://zimbabwe.misa.org/feed/" htmlUrl="https://zimbabwe.misa.org"/>
+            <outline type="rss" text="RSS 2.0" title="RSS 2.0" xmlUrl="https://www.zwrcn.org.zw/index.php?format=feed&amp;type=rss"/>
+        </outline>
+        <outline text="Videos - Vlogs" title="Videos - Vlogs" subtypeid="18">
+            <outline type="rss" text="Mai T's Diaries" title="Mai T's Diaries" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC0v9iq8PlaGoVFTEtgsHTpQ" htmlUrl="https://www.youtube.com/channel/UC0v9iq8PlaGoVFTEtgsHTpQ"/>
+            <outline type="rss" text="Afronomads" title="Afronomads" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCXMqO1T21vy1zQcptw2aagQ" htmlUrl="https://www.youtube.com/channel/UCXMqO1T21vy1zQcptw2aagQ"/>
+        </outline>
+        <outline text="Videos - Educational" title="Videos - Educational" subtypeid="19">
+            <outline type="rss" text="Shona Kids Songs" title="Shona Kids Songs" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCcojRx1qJVJpP0pLTCSy5mA" htmlUrl="https://www.youtube.com/channel/UCcojRx1qJVJpP0pLTCSy5mA"/>
+            <outline type="rss" text="Tidanatipa" title="Tidanatipa" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCEKSOUgUYU3O3hk-f5BREUg" htmlUrl="https://www.youtube.com/channel/UCEKSOUgUYU3O3hk-f5BREUg"/>
+            <outline type="rss" text="Ndawana and Friends" title="Ndawana and Friends" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCHQ4wmVikQxYKDlRV9R8wTg" htmlUrl="https://www.youtube.com/channel/UCHQ4wmVikQxYKDlRV9R8wTg"/>
+            <outline type="rss" text="SARURA KIDS" title="SARURA KIDS" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC-ed9vu7WITci-gJN230ysg" htmlUrl="https://www.youtube.com/channel/UC-ed9vu7WITci-gJN230ysg"/>
+        </outline>
+        <outline text="Videos - Food" title="Videos - Food" subtypeid="14">
+            <outline type="rss" text="Cook with Terry" title="Cook with Terry" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCBAwrY72uVVfA2BZk-jIt2A" htmlUrl="https://www.youtube.com/channel/UCBAwrY72uVVfA2BZk-jIt2A"/>
+        </outline>
+        <outline text="Blog - Financial" title="Blog - Financial" subtypeid="5">
+            <outline type="rss" text="Celebration Ministries Int | Zimbabwe" title="Celebration Ministries Int | Zimbabwe" xmlUrl="http://feeds.soundcloud.com/users/soundcloud:users:238318850/sounds.rss" htmlUrl="https://soundcloud.com/user-756450065"/>
+            <outline type="rss" text="Mari" title="Mari" xmlUrl="http://www.mari.co.zw/feed/" htmlUrl="http://www.mari.co.zw"/>
+        </outline>
+        <outline text="Videos - TV Series" title="Videos - TV Series" subtypeid="17">
+            <outline type="rss" text="College Central" title="College Central" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCl2ECTMVKOQQ2NPZ56AKrhA" htmlUrl="https://www.youtube.com/channel/UCl2ECTMVKOQQ2NPZ56AKrhA"/>
+        </outline>
+        <outline text="Videos - Praise &amp; Worship" title="Videos - Praise &amp; Worship" subtypeid="16">
+            <outline type="rss" text="Zimpraise Legacy TV" title="Zimpraise Legacy TV" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC5tDUF4EsCZYm2oBkMkynBw" htmlUrl="https://www.youtube.com/channel/UC5tDUF4EsCZYm2oBkMkynBw"/>
+            <outline type="rss" text="Chisipite Worship Team" title="Chisipite Worship Team" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCkToGsgwhMkT5iiSGRDWVCg" htmlUrl="https://www.youtube.com/channel/UCkToGsgwhMkT5iiSGRDWVCg"/>
+        </outline>
+        <outline text="Videos - News" title="Videos - News" subtypeid="13">
+            <outline type="rss" text="Zimpapers Digital" title="Zimpapers Digital" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCc5PNvzK16y8gq2Jx8vovmQ" htmlUrl="https://www.youtube.com/channel/UCc5PNvzK16y8gq2Jx8vovmQ"/>
+        </outline>
+        <outline text="Sites - News" title="Sites - News" subtypeid="22">
+            <outline type="rss" text="Bulawayo24 News" title="Bulawayo24 News" xmlUrl="http://www.bulawayo24.com/feeds-rss-rss.rss" htmlUrl="http://bulawayo24.com"/>
+            <outline type="rss" text="The Sunday News" title="The Sunday News" xmlUrl="http://www.sundaynews.co.zw/feed/" htmlUrl="https://www.sundaynews.co.zw"/>
+            <outline type="rss" text="#Asakhe – CITE" title="#Asakhe – CITE" xmlUrl="https://cite.org.zw/feed/" htmlUrl="https://cite.org.zw"/>
+            <outline type="rss" text="Pindula News" title="Pindula News" xmlUrl="https://news.pindula.co.zw/feed/" htmlUrl="https://news.pindula.co.zw"/>
+            <outline type="rss" text="Zimbabwe News Now" title="Zimbabwe News Now" xmlUrl="https://www.zimlive.com/feed/" htmlUrl="https://www.zimlive.com"/>
+            <outline type="rss" text="The Sunday Mail" title="The Sunday Mail" xmlUrl="http://www.sundaymail.co.zw/feed/" htmlUrl="https://www.sundaymail.co.zw"/>
+            <outline type="rss" text="263Chat" title="263Chat" xmlUrl="http://263chat.com/feed/" htmlUrl="https://www.263chat.com"/>
+            <outline type="rss" text="The Herald" title="The Herald" xmlUrl="http://www.herald.co.zw/feed/" htmlUrl="https://www.herald.co.zw"/>
+            <outline type="rss" text="The Zimbabwean" title="The Zimbabwean" xmlUrl="http://www.thezimbabwean.co.uk/rss" htmlUrl="https://www.thezimbabwean.co"/>
+            <outline type="rss" text="The Zimbabwe Mail" title="The Zimbabwe Mail" xmlUrl="http://thezimbabwemail.com/feed/" htmlUrl="https://www.thezimbabwemail.com"/>
+            <outline type="rss" text="NewZimbabwe.com" title="NewZimbabwe.com" xmlUrl="https://www.newzimbabwe.com/feed/" htmlUrl="https://www.newzimbabwe.com"/>
+            <outline type="rss" text="Soccer24 » Feed" title="Soccer24 » Feed" xmlUrl="https://www.soccer24.co.zw/feed/" htmlUrl="https://www.soccer24.co.zw"/>
+            <outline type="rss" text="The Chronicle" title="The Chronicle" xmlUrl="http://www.chronicle.co.zw/feed/" htmlUrl="https://www.chronicle.co.zw"/>
+            <outline type="rss" text="Voice of America" title="Voice of America" xmlUrl="https://www.voazimbabwe.com/api/" htmlUrl="https://www.voazimbabwe.com"/>
+            <outline type="rss" text="The Zimbabwe Independent" title="The Zimbabwe Independent" xmlUrl="http://www.theindependent.co.zw/feed/" htmlUrl="https://www.theindependent.co.zw"/>
+            <outline type="rss" text="DailyNews Live" title="DailyNews Live" xmlUrl="http://www.dailynews.co.zw/rss/articles.xml" htmlUrl="http://www.dailynews.co.zw/"/>
+            <outline type="rss" text="NewsDay Zimbabwe" title="NewsDay Zimbabwe" xmlUrl="http://www.newsday.co.zw/feed/" htmlUrl="https://www.newsday.co.zw"/>
+            <outline type="rss" text="ZimEye" title="ZimEye" xmlUrl="http://www.zimeye.org/?feed=rss2" htmlUrl="https://www.zimeye.net"/>
+            <outline type="rss" text="The Financial Gazette" title="The Financial Gazette" xmlUrl="http://www.financialgazette.co.zw/feed/" htmlUrl="https://www.fingaz.co.zw"/>
+            <outline type="rss" text="Nehanda Radio" title="Nehanda Radio" xmlUrl="http://nehandaradio.com/feed/" htmlUrl="https://nehandaradio.com"/>
+            <outline type="rss" text="Zimbabwe Situation" title="Zimbabwe Situation" xmlUrl="http://www.zimbabwesituation.com/feed/" htmlUrl="https://www.zimbabwesituation.com"/>
+            <outline type="rss" text="Nehanda TV » Feed" title="Nehanda TV » Feed" xmlUrl="http://nehandatv.com/feed/" htmlUrl="https://nehandatv.com"/>
+            <outline type="rss" text="DailyNews" title="DailyNews" xmlUrl="https://dailynews.co.zw/feed/" htmlUrl="https://dailynews.co.zw"/>
+        </outline>
+        <outline text="Blogs" title="Blogs" subtypeid="1">
+            <outline type="rss" text="MAKUPSY" title="MAKUPSY" xmlUrl="https://makupsy.wordpress.com/feed/" htmlUrl="https://makupsy.wordpress.com"/>
+            <outline type="rss" text="Three Men On A Boat" title="Three Men On A Boat" xmlUrl="http://www.3-mob.com/?feed=rss2" htmlUrl="https://3-mob.com"/>
+            <outline type="rss" text="Kicking It With Mimi » Feed" title="Kicking It With Mimi » Feed" xmlUrl="https://kickingitwithmimi.com/feed/" htmlUrl="https://kickingitwithmimi.com"/>
+            <outline type="rss" text="" title="" xmlUrl="https://fungaineni.net/feed/" htmlUrl="https://fungaineni.net"/>
+            <outline type="rss" text="Troika Design Workshop » Feed" title="Troika Design Workshop » Feed" xmlUrl="https://www.troikadesignworkshop.com/feed/" htmlUrl="https://www.troikadesignworkshop.com"/>
+            <outline type="rss" text="" title="" xmlUrl="https://quintessentialf.wordpress.com/feed/" htmlUrl="https://quintessentialf.wordpress.com"/>
+            <outline type="rss" text="Techzim" title="Techzim" xmlUrl="http://www.techzim.co.zw/feed/" htmlUrl="https://www.techzim.co.zw"/>
+            <outline type="rss" text="ZimVogue" title="ZimVogue" xmlUrl="http://zimvogue.blogspot.com/feeds/posts/default?alt=rss" htmlUrl="http://zimvogue.blogspot.com/"/>
+            <outline type="rss" text="StartupBiz Zimbabwe » Feed" title="StartupBiz Zimbabwe » Feed" xmlUrl="https://startupbiz.co.zw/feed/" htmlUrl="https://startupbiz.co.zw"/>
+            <outline type="rss" text="Passion in the Moments" title="Passion in the Moments" xmlUrl="http://ethos-photographic.blogspot.com/feeds/posts/default" htmlUrl="http://ethos-photographic.blogspot.com/"/>
+            <outline type="rss" text="Takura Zhangazha" title="Takura Zhangazha" xmlUrl="http://takura-zhangazha.blogspot.com/feeds/posts/default" htmlUrl="http://takura-zhangazha.blogspot.com/"/>
+        </outline>
+        <outline text="Sites - Entertainment &amp; Gossip" title="Sites - Entertainment &amp; Gossip" subtypeid="8">
+            <outline type="rss" text="earGROUND" title="earGROUND" xmlUrl="https://earground.com/feed/" htmlUrl="https://earground.com"/>
+            <outline type="rss" text="Zimbo Jam" title="Zimbo Jam" xmlUrl="http://www.zimbojam.com/feed/" htmlUrl="https://www.zimbojam.com"/>
+            <outline type="rss" text="Youth Village Zimbabwe" title="Youth Village Zimbabwe" xmlUrl="http://youthvillage.co.zw/feed/" htmlUrl="https://youthvillage.co.zw"/>
+            <outline type="rss" text="iHarare News" title="iHarare News" xmlUrl="http://iharare.co.zw/feed/" htmlUrl="https://iharare.com"/>
+            <outline type="rss" text="Mafaro" title="Mafaro" xmlUrl="http://www.mafaro.co.uk/feeds/posts/default" htmlUrl="http://www.mafaro.co.uk/"/>
+            <outline type="rss" text="Creative Loop" title="Creative Loop" xmlUrl="https://www.creativeloop.co.zw/feed/" htmlUrl="https://www.creativeloop.co.zw"/>
+            <outline type="rss" text="H-Metro" title="H-Metro" xmlUrl="http://hmetro.co.zw/feed/" htmlUrl="https://www.hmetro.co.zw"/>
+            <outline type="rss" text="Magamba Network » Feed" title="Magamba Network » Feed" xmlUrl="http://magambanetwork.com/feed/" htmlUrl="http://magambanetwork.com"/>
+        </outline>
+        <outline text="Videos - Church" title="Videos - Church" subtypeid="16">
+            <outline type="rss" text="Jesus Revelation Ministries" title="Jesus Revelation Ministries" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCN4kKU9NQLsGfvbpwSM7Ugw" htmlUrl="https://www.youtube.com/channel/UCN4kKU9NQLsGfvbpwSM7Ugw"/>
+            <outline type="rss" text="CHRIST TV" title="CHRIST TV" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCgzdwgfCJItgP9Epm0eh02A" htmlUrl="https://www.youtube.com/channel/UCgzdwgfCJItgP9Epm0eh02A"/>
+            <outline type="rss" text="PHD Ministries Yadah_TV" title="PHD Ministries Yadah_TV" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCEHG5TRrZqplawb-J1z1bcQ" htmlUrl="https://www.youtube.com/channel/UCEHG5TRrZqplawb-J1z1bcQ"/>
+            <outline type="rss" text="Ezekiel TV Channel" title="Ezekiel TV Channel" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC7yNDn4Aktu3ud9QzPMgGtA" htmlUrl="https://www.youtube.com/channel/UC7yNDn4Aktu3ud9QzPMgGtA"/>
+        </outline>
+        <outline text="Podcasts - Church" title="Podcasts - Church" subtypeid="12">
+            <outline type="rss" text="Celebration Ministries Int | Zimbabwe" title="Celebration Ministries Int | Zimbabwe" xmlUrl="http://feeds.soundcloud.com/users/soundcloud:users:238318850/sounds.rss" htmlUrl="https://soundcloud.com/user-756450065"/>
+            <outline type="rss" text="Wynnbrook Baptist Church" title="Wynnbrook Baptist Church" xmlUrl="http://wynnbrookbaptistchurch.cloversites.com/podcast/b15df88c-9c60-4cf5-a502-084602a0ca78.xml" htmlUrl="http://wynnbrookbaptist.com"/>
+            <outline type="rss" text="Harvest Church" title="Harvest Church" xmlUrl="https://harvestchurch.co.zw/media/podcast/3201/feed.rss" htmlUrl="http://harvestchurch.co.zw/media"/>
+            <outline type="rss" text="Radiant Culture" title="Radiant Culture" xmlUrl="https://iono.fm/rss/chan/2910" htmlUrl="http://www.radiant-culture.com"/>
+        </outline>
+        <outline text="Videos - Entertainment" title="Videos - Entertainment" subtypeid="17">
+            <outline type="rss" text="NashTv" title="NashTv" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC5sNRUbhraoEpbx3LUdpeqg" htmlUrl="https://www.youtube.com/channel/UC5sNRUbhraoEpbx3LUdpeqg"/>
+            <outline type="rss" text="MadeinZWE" title="MadeinZWE" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCyrd3KJRjs66upWzvcFQziA" htmlUrl="https://www.youtube.com/channel/UCyrd3KJRjs66upWzvcFQziA"/>
+            <outline type="rss" text="The DNA Closure Show" title="The DNA Closure Show" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCn2d-FKT7jNwgP4807DFZwg" htmlUrl="https://www.youtube.com/channel/UCn2d-FKT7jNwgP4807DFZwg"/>
+        </outline>
+        <outline text="Podcasts - Financial" title="Podcasts - Financial" subtypeid="5">
+            <outline type="rss" text="Mari" title="Mari" xmlUrl="http://www.mari.co.zw/feed/podcast" htmlUrl="http://www.mari.co.zw/"/>
+        </outline>
+        <outline text="Videos - Comedy" title="Videos - Comedy" subtypeid="20">
+            <outline type="rss" text="Pano TV" title="Pano TV" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCwM4fQ-e2ZTyMSTGRyiGzqA" htmlUrl="https://www.youtube.com/channel/UCwM4fQ-e2ZTyMSTGRyiGzqA"/>
+            <outline type="rss" text="Crazy Creative Minds Studios©️" title="Crazy Creative Minds Studios©️" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCIjxWkrgYbRr1UF08HuxPJA" htmlUrl="https://www.youtube.com/channel/UCIjxWkrgYbRr1UF08HuxPJA"/>
+            <outline type="rss" text="Comic Pastor" title="Comic Pastor" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCpXO5xlMlku6ImNIbJlvNJA" htmlUrl="https://www.youtube.com/channel/UCpXO5xlMlku6ImNIbJlvNJA"/>
+            <outline type="rss" text="Naiza Boom" title="Naiza Boom" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCTy8e7X_URHP1JaSQ5OQuyw" htmlUrl="https://www.youtube.com/channel/UCTy8e7X_URHP1JaSQ5OQuyw"/>
+            <outline type="rss" text="Magamba TV" title="Magamba TV" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCYc9iRGgh6oHtlH-g1s96Pg" htmlUrl="https://www.youtube.com/channel/UCYc9iRGgh6oHtlH-g1s96Pg"/>
+            <outline type="rss" text=" BUSTOP TV " title=" BUSTOP TV " xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCGXpCeZNe7kzeHqMlg96Ebg" htmlUrl="https://www.youtube.com/channel/UCGXpCeZNe7kzeHqMlg96Ebg"/>
+            <outline type="rss" text="Ray Vines" title="Ray Vines" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCIQg0FHxHYInjGQvzVf113g" htmlUrl="https://www.youtube.com/channel/UCIQg0FHxHYInjGQvzVf113g"/>
+            <outline type="rss" text="Taffy Theman" title="Taffy Theman" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCQoO4nNDGfSomsAu8Hk6u6g" htmlUrl="https://www.youtube.com/channel/UCQoO4nNDGfSomsAu8Hk6u6g"/>
+            <outline type="rss" text="MADAM BOSS" title="MADAM BOSS" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC4jzrEF8ccd1UgNkpX-p3Iw" htmlUrl="https://www.youtube.com/channel/UC4jzrEF8ccd1UgNkpX-p3Iw"/>
+            <outline type="rss" text="MATSANGA COMEDY -TEAM PAGHETTO FILMS" title="MATSANGA COMEDY -TEAM PAGHETTO FILMS" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCQKtZF7hu1DsgDSmMY7HMdg" htmlUrl="https://www.youtube.com/channel/UCQKtZF7hu1DsgDSmMY7HMdg"/>
+        </outline>
+    </body>
+</opml>

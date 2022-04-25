@@ -1,0 +1,26 @@
+﻿
+@model Curate.Data.ViewModels.NyamboViewModel
+<div class="pb-2 mb-2 mb-md-4">
+    <div class="container">
+        <div class="row">
+            <!--Breadcrumb-->
+            <div class="col-12">
+                <div class="breadcrumb u-breadcrumb  pt-3 px-0 mb-0 bg-transparent small">
+                    <a class="breadcrumb-item" href="@Url.Content("~/")">Curate</a>&nbsp;&nbsp;»&nbsp;&nbsp;<a href="@Url.Content("~/nyambo")">Nyambo</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+                <partial name="Nyambo/_Nyambo" model="Model" />
+            <div class="gap-2"></div>
+        </div>
+        <partial name="Asides/_NyamboAside" />
+    </div>
+</div>
+

@@ -1,0 +1,6 @@
+﻿@using Curate.Web.Views.Shared.Components.AdminHeaderLeft
+@using Curate.Web.Views.Shared.Components.AdminHeaderRight
+<nav class="main-header navbar navbar-expand-md navbar-white navbar-light">
+    @(await Component.InvokeAsync<AdminHeaderLeftViewComponent>())
+    @(await Component.InvokeAsync<AdminHeaderRightViewComponent>())
+</nav>

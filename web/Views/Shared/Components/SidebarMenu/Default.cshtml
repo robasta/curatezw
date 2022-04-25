@@ -1,0 +1,52 @@
+﻿<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="mainmenuTreeview">
+        <!-- Add icons to the links using the .nav-icon class
+         with font-awesome or any other icon font library -->
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-rss"></i>
+                <p>
+                    RSS Feeds
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Feed")" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Browse</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Update</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+       <li class="nav-item has-treeview">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-video"></i>
+                <p>
+                    Video
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Feed")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Channel</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Playlist</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

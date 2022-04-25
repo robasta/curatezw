@@ -1,0 +1,17 @@
+﻿@model Curate.Data.ViewModels.NyamboViewModel
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    @Model.Title
+    <p>@Html.Raw(Model.Body)</p>
+    @if (Model.Tags != null && Model.Tags.Any())
+    {
+        @foreach (var tag in Model.Tags)
+        {
+            <span class="badge badge-info badge-pill" > <a href="@tag.AbsoluteUrl" style="color: white">@tag.Title</a></span>
+        }
+    }
+    <div>
+        <a target="_blank" href="http://twitter.com/intent/tweet?original_referer=curate.co.zw&url=@Model.HtmlEncodedUrl"><i class="fab fa-twitter"></i></a>
+        <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=@Model.HtmlEncodedUrl"><i class="fab fa-facebook"></i></a>
+        <a target="_blank" href="https://api.whatsapp.com/send/?phone&text=@Model.HtmlEncodedUrl"><i class="fab fa-whatsapp"></i></a>
+    </div>
+</div>
