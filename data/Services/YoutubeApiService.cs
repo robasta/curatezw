@@ -31,7 +31,7 @@ namespace Curate.Data.Services
             _videoChannelRepository = videoChannelRepository;
             _youTubeService = new YouTubeService(new BaseClientService.Initializer
             {
-                ApiKey = "AIzaSyDdNzf1ppCLC6NnaHWHhQRbXOZk_5owU_g",
+                ApiKey = "",
                 ApplicationName = this.GetType().ToString()
             });
         }

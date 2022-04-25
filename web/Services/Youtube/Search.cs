@@ -38,7 +38,7 @@ namespace Curate.Web.Services.Youtube
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyCic5-DHTtNjS6923o_L2LSb9zxRVp2i4E",
+                ApiKey = "",
                 ApplicationName = this.GetType().ToString()
             });
 
