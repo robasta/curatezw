@@ -1,3 +1,3 @@
-# Curate Frontend
+# Curate Web App
 
-.NET frontend for Curate.co.zw
+Source for curate.co.zw
