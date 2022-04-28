@@ -1,5 +1,102 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using Curate.Data.Models
+@model IEnumerable<VideoChannel>;
+@section Styles{
+<!-- DataTables -->
+<link rel="stylesheet" href="/lib/datatables/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/lib/datatables.net-responsive-bs4/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="/lib/datatables.net-buttons-bs4/buttons.bootstrap4.css">
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Video Channels</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Channels</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="@Url.Action("CreateChannel","Video")" class="btn btn-success float-right">Create</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Blurb</th>
+                                    <th>Last Modified</th>
+                                    <th>Url</th>
+                                    <th>ImageUrl</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var channel in Model)
+                                {
+                                    <tr>
+                                        <td>@channel.Title</td>
+                                        <td>@channel.Blurb</td>
+                                        <td>@channel.LastModifiedDate</td>
+                                        <td>@channel.Url</td>
+                                        <td>@channel.ImageUrl</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Rendering engine</th>
+                                    <th>Browser</th>
+                                    <th>Platform(s)</th>
+                                    <th>Engine version</th>
+                                    <th>CSS grade</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+@section Scripts{
+<!-- DataTables  & Plugins -->
+<script src="/lib/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/lib/datatables.net-bs4/dataTables.bootstrap4.min.js"></script>
+<script src="/lib/datatables-responsive/dataTables.responsive.min.js"></script>
+<script src="/lib/datatables.net-responsive-bs4/responsive.bootstrap4.min.js"></script>
+<script src="/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/lib/datatables.net-buttons-bs4/buttons.bootstrap4.min.js"></script>
+<script src="/lib/jszip/jszip.min.js"></script>
+<script src="/lib/pdfmake/pdfmake.min.js"></script>
+<script src="/lib/pdfmake/vfs_fonts.js"></script>
+<script src="/lib/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/lib/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/lib/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Page specific script -->
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": true, "autoWidth": true,
+        //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
 }

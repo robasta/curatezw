@@ -9,5 +9,6 @@ namespace Curate.Data.Services.Interfaces
         Video GetVideo(int id);
         VideoPlaylist GetPlaylist(int id);
         void CreateChannel(VideoChannel channel);
+        IEnumerable<VideoChannel> GetAllChannels();
     }
 }

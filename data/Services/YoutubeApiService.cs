@@ -121,6 +121,16 @@ namespace Curate.Data.Services
             await  _unitOfWork.CommitAsync();
         }
 
+        public async Task<VideoChannel> GetChannelById(string channelId)
+        {
+            var channelRequest = _youTubeService.Channels.List("snippet,contentDetails");
+            channelRequest.Id = channelId;
+            var channelResponse = await channelRequest.ExecuteAsync();
+            var channel = channelResponse.Items.First();
+            var curateChannel = _mapper.Map<VideoChannel>(channel);
+
+            return curateChannel;
+        }
 
     }
 }

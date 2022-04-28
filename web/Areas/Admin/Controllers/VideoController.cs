@@ -1,6 +1,5 @@
 ﻿using Curate.Data.Models;
 using Curate.Data.Services.Interfaces;
-using Curate.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,8 +40,8 @@ namespace Curate.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Channels()
         {
-            var viewModel = new TopicViewModel();
-            return View(viewModel);
+            var channels = _videoService.GetAllChannels();
+            return View(channels);
         }
 
         [HttpGet]

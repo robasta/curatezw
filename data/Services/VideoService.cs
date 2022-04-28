@@ -10,10 +10,12 @@ namespace Curate.Data.Services
     {
         private readonly IVideoRepository _videoRepository;
         private readonly IVideoPlaylistRepository _videoPlaylistRepository;
-        public VideoService(IVideoRepository videoRepository, IVideoPlaylistRepository videoPlaylistRepository)
+        private readonly IVideoChannelRepository _videoChannelRepository;
+        public VideoService(IVideoRepository videoRepository, IVideoPlaylistRepository videoPlaylistRepository, IVideoChannelRepository videoChannelRepository)
         {
             _videoRepository = videoRepository;
             _videoPlaylistRepository = videoPlaylistRepository;
+            _videoChannelRepository = videoChannelRepository;
         }
         public Video GetVideo(int id)
         {
@@ -32,7 +34,12 @@ namespace Curate.Data.Services
 
         public void CreateChannel(VideoChannel channel)
         {
-            throw new System.NotImplementedException();
+            _videoChannelRepository.Add(channel);
+        }
+
+        public IEnumerable<VideoChannel> GetAllChannels()
+        {
+            return _videoChannelRepository.All();
         }
     }
 }

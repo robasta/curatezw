@@ -10,16 +10,16 @@
       ]
     },
     {
-      "library": "bootstrap@4.4.1",
       "provider": "jsdelivr",
+      "library": "bootstrap@4.4.1",
       "destination": "wwwroot/lib/bootstrap",
       "files": [
         "dist/js/bootstrap.bundle.min.js"
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@5.13.0",
       "provider": "jsdelivr",
+      "library": "@fortawesome/fontawesome-free@5.13.0",
       "destination": "wwwroot/lib/font-awesome",
       "files": [
         "css/all.min.css",
@@ -41,8 +41,8 @@
       ]
     },
     {
-      "library": "admin-lte@3.2.0",
       "provider": "jsdelivr",
+      "library": "admin-lte@3.2.0",
       "destination": "wwwroot/lib/admin-lte",
       "files": [
         "dist/js/adminlte.min.js",
@@ -53,6 +53,38 @@
         "dist/img/user8-128x128.jpg",
         "dist/img/user3-128x128.jpg"
       ]
+    },
+    {
+      "library": "datatables@1.10.21",
+      "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "jszip@3.9.1",
+      "destination": "wwwroot/lib/jszip/"
+    },
+    {
+      "library": "pdfmake@0.2.5",
+      "destination": "wwwroot/lib/pdfmake/"
+    },
+    {
+      "library": "datatables-buttons@2.2.2",
+      "destination": "wwwroot/lib/datatables-buttons/"
+    },
+    {
+      "library": "datatables.net-bs4@3.2.2",
+      "destination": "wwwroot/lib/datatables.net-bs4/"
+    },
+    {
+      "library": "datatables-responsive@2.2.9",
+      "destination": "wwwroot/lib/datatables-responsive/"
+    },
+    {
+      "library": "datatables.net-buttons-bs4@2.2.2",
+      "destination": "wwwroot/lib/datatables.net-buttons-bs4/"
+    },
+    {
+      "library": "datatables.net-responsive-bs4@2.2.9",
+      "destination": "wwwroot/lib/datatables.net-responsive-bs4/"
     }
   ]
 }
