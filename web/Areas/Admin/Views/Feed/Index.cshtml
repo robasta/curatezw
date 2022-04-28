@@ -11,6 +11,9 @@
 {
     <script type="text/javascript">
     $(document).ready(function () {
+        $('ul').Treeview({
+            "trigger":"[data-widget='treeview'] .nav-link"
+        });
         @if (Model.Count() > 0)
         {
             @:selectFeed(@Model.First().Id);
@@ -211,7 +214,7 @@
 
         $.ajax({
             type: "GET",
-            url: '/feed/GetOneFeed?feedId=' + feedId,
+            url: '/admin/feed/GetOneFeed?feedId=' + feedId,
             contentType: "application/json",
             dataType: "json",
             success: function (response) {
@@ -250,13 +253,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Featured Topics
+        RSS Feeds
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-    </ol>
 </section>
 
 <!-- Main content -->
@@ -269,32 +267,29 @@
                 <!-- /.box-header -->
                 <div id="divFeeds">
                     <div class="panel panel-default">
-                        <div id="divFeedHeader" class="panel-heading">
-                            RSSReader
-
-                        </div>
+                        
                         <div class="panel-body">
                             
-                            <ul class="nav nav-pills flex-column"  data-widget="treeview" id="feedTreeview" data-accordion="false">
+                            <ul data-widget="treeview" id="feedTreeview" data-accordion="true">
                                 @foreach (var category in Model)
                                 {
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">@category.Title</a>
-                                        <ul class="nav-treeview">
+                                    <li class="treeview">
+                                        <a href="#">@category.Title</a>
+                                        <ul class="treeview-menu nav-link">
                                             @foreach (var subcategory in category.SubCategories)
-                                            {<li class="nav-item">
-                                            <a class="nav-link" href="#">@subcategory.Title</a>
-                                            <ul class="nav-treeview">
+                                            {<li >
+                                            <a href="#">@subcategory.Title</a>
+                                            <ul class="treeview-menu nav-link">
 
                                                 @foreach (var feed in subcategory.Feeds)
                                                 {
                                                     if (feed.Blocked)
                                                     {
-                                                        <li class="nav-item"><strike>@feed.Title</strike></li>
+                                                        <li ><strike>@feed.Title</strike></li>
                                                     }
                                                     else
                                                     {
-                                                        <li class="nav-item"><a class="nav-link" onclick="selectFeed(@feed.Id);return false;">@feed.Title</a></li>
+                                                        <li ><a onclick="selectFeed(@feed.Id);return false;">@feed.Title</a></li>
                                                     }
                                                 }
                                             </ul>
