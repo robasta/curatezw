@@ -48,28 +48,35 @@ namespace Curate.Data.Services
             try
             {
                 var data = await FeedReader.ReadAsync(feed.XmlUrl);
-                //var feed= _feedRepository.List(f => f.Id == feed.Id).First();
                 link = data.Link;
-                feed.ImageUrl = data.ImageUrl;
+                if (!string.IsNullOrEmpty(data.ImageUrl))
+                    feed.ImageUrl = data.ImageUrl;
+                if (!string.IsNullOrEmpty(data.Description))
+                    feed.Blurb = data.Description;
+                if(!string.IsNullOrEmpty(data.Title))
+                    feed.Title = data.Title;
                 feed.LastUpdated = DateTime.Now;
-                feed.Blurb = data.Description;
-                feed.Title = data.Title;
 
                 _feedRepository.Update(feed);
 
                 foreach (var item in data.Items)
                 {
-                   var article =  new RssFeedArticle
+                    var itemUrl = item.Link ?? item.Id;
+                    var dbArticle = _feedArticleRepository.List(a => a.Url == itemUrl).FirstOrDefault();
+                    if (dbArticle == null)
                     {
-                        Body = item.Content,
-                        Url = item.Link??item.Id,
-                        PublishDate = DateTime.Parse(item.PublishingDateString),
-                        LastModifiedDate = DateTime.Now,
-                        IsProcessed = false,
-                        Title = item.Title,
-                        RssFeedId = feed.Id,
-                    };
-                   _feedArticleRepository.Add(article);
+                        var article = new RssFeedArticle
+                        {
+                            Body = item.Content,
+                            Url = itemUrl,
+                            PublishDate = DateTime.Parse(item.PublishingDateString),
+                            LastModifiedDate = DateTime.Now,
+                            IsProcessed = false,
+                            Title = item.Title,
+                            RssFeedId = feed.Id,
+                        };
+                        _feedArticleRepository.Add(article);
+                    }
                 }
             }
             catch (Exception ex)
@@ -91,13 +98,11 @@ namespace Curate.Data.Services
 
         public async Task<bool> ScanAllRssFeeds()
         {
-            var tasks = new List<Task>();
             var rssFeeds = _feedRepository.List(x=>x.Blocked == false).ToList();
             foreach (var item in rssFeeds)
             {
-                tasks.Add(ProcessRssFeed(item));
+               await ProcessRssFeed(item);
             }
-            Task.WhenAll(tasks).Wait();
            return await _unitOfWork.CommitAsync()>0;
 
         }
@@ -114,7 +119,7 @@ namespace Curate.Data.Services
 
         public List<FeedCategoryViewModel> GetAllCategorizedFeeds()
         {
-            var categories = _feedCategoryRepository.All("RssFeedSubtypes,RssFeedSubtypes.RssFeeds");
+            var categories = _feedCategoryRepository.All("RssFeedSubtypes,RssFeedSubtypes.RssFeeds,RssFeedSubtypes.RssFeeds.RssFeedArticles");
             var viewModel = _mapper.Map<List<FeedCategoryViewModel>>(categories);
           
             return viewModel;

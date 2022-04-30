@@ -16,7 +16,6 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest => dest.LastModifiedDate, opt => opt.MapFrom(src => src.Snippet.PublishedAt))
                 .ForMember(dest=> dest.Url, opt => opt.MapFrom(src=>src.Snippet.CustomUrl))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src=>src.Snippet.Thumbnails.Default__.Url))
-                .ForMember(dest => dest.YoutubeChannelId, opt=> opt.MapFrom(src=> src.Id))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<VideoChannelResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());
 

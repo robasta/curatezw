@@ -1,15 +1,134 @@
-﻿
-@model List<Curate.Data.ViewModels.RssFeed.FeedCategoryViewModel>
-@{ ViewData["Title"] = "Feeds"; }
-
+﻿@model List<Curate.Data.ViewModels.RssFeed.FeedCategoryViewModel>
+@{
+    ViewData["Title"] = "RSS Feeds";
+}
 
 @section Styles {
 
 }
 
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>RSS Feeds</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">RSS Feeds</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="card-body p-0">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+
+                <div class="card">
+                    <div class="card-header">
+                        <a href="@Url.Action("ScanAll","Feed")" class="btn btn-success btn-xs">Scan All Feeds</a>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0" style="height:650px;overflow-y: scroll;">
+                        <ul data-widget="treeview" id="feedTreeview" data-accordion="true">
+                            @foreach (var category in Model)
+                            {
+                                <li class="treeview">
+                                    <a href="#">@category.Title</a>
+                                    <ul class="treeview-menu nav-link">
+                                        @foreach (var subcategory in category.SubCategories)
+                                        {
+                                            <li>
+                                                <a href="#">@subcategory.Title</a>
+                                                <ul class="treeview-menu nav-link">
+
+                                                    @foreach (var feed in subcategory.Feeds)
+                                                    {
+                                                        if (feed.Blocked)
+                                                        {
+                                                            <li><strike>@feed.Title</strike></li>
+                                                        }
+                                                        else
+                                                        {
+                                                           
+                                                            <li><a onclick="selectFeed(@feed.Id);return false;">@feed.Title <span title="@feed.Articles.Count" class="badge bg-success">@feed.Articles.Count</span></a></li>
+                                                        }
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        @*<ul class="nav nav-pills flex-column">
+                            <li class="nav-item active">
+                            <a href="#" class="nav-link">
+                            <i class="fas fa-inbox"></i> Inbox
+                            <span class="badge bg-primary float-right">12</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="far fa-envelope"></i> Sent
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="far fa-file-alt"></i> Drafts
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="fas fa-filter"></i> Junk
+                            <span class="badge bg-warning float-right">65</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="far fa-trash-alt"></i> Trash
+                            </a>
+                            </li>
+                            </ul>*@
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <!-- Horizontal Form -->
+                <div class="card card-primary card-outline" id="articles_card">
+                    <div class="card-header">
+                        <h3 class="card-title" id="selectedFeedTitle">Articles</h3>
+                    </div>
+                    <div id="divArticles" class="card-body p-0">
+                        <table id="tblArticles" class="table table-striped projects">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
 @section scripts
 {
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('ul').Treeview({
             "trigger":"[data-widget='treeview'] .nav-link"
@@ -17,195 +136,18 @@
         @if (Model.Count() > 0)
         {
             @:selectFeed(@Model.First().Id);
-
         }
-
-        $('#addUrl').on('blur', function () {
-            var url = $('#addUrl').val();
-            if (isUrlValid(url) || url == "") {
-                $('#addUrl').css('background-color', 'white');
-                $('#addUrl').css('color', 'black');
-
-
-            }
-            else {
-                $('#addUrl').css('background-color', 'red');
-                $('#addUrl').css('color', 'white');
-            }
-
-        });
-
-        $('#addUrl').on('propertychange input', function () {
-            var url = $('#addUrl').val();
-            if (url == "") {
-                $('#addUrl').css('background-color', 'white');
-                $('#addUrl').css('color', 'black');
-            }
-        });
     });
-
-    function feedCollapse() {
-        $('#feedCollapse').css('display', 'none');
-        $('#feedExpand').css('display', 'inline');
-        $('#divFeeds').css('max-width', '0px');
-        $('#divFeeds').css('min-width', '0px');
-    }
-
-    function feedExpand() {
-        $('#feedExpand').css('display', 'none');
-        $('#feedCollapse').css('display', 'inline');
-        $('#divFeeds').css('max-width', '300px');
-        $('#divFeeds').css('min-width', '300px');
-    }
-
-    function addFeed() {
-        var url = $('#addUrl').val();
-        if (isUrlValid(url)) {
-            $.ajax({
-                type: "POST",
-                url: '/?handler=addFeed&url=' + url,
-                headers:
-                {
-                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                contentType: "application/json",
-                dataType: "json",
-                success: function (response) {
-                    selectFeed(response.id);
-                },
-                failure: function (response) {
-                    alert(response);
-                }
-            });
-        }
-    }
-
-    function markAsRead(div, id)
-    {
-        $(div).css('font-weight', 'normal');
-
-        $.ajax({
-            type: "POST",
-            url: '/?handler=markArticleAsRead&id=' + id,
-            headers:
-            {
-                "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-            },
-            contentType: "application/json",
-            dataType: "json",
-            success: function (response) {
-
-            },
-            failure: function (response) {
-                alert(response);
-            }
-        });
-
-    }
-
-    function showOrHide(id)
-    {
-        if ($('#' + id).css('display') == 'none')
-        {
-            $('#' + id).css('display', 'block');
-
-        }
-        else {
-            $('#' + id).css('display', 'none');
-
-        }
-    }
 
     function getSelectedFeed() {
         return $('#selectedFeedId').val();
     }
 
-    function editSelectedFeedName()
-    {
-        var id = '#feed' + getSelectedFeed();
-        $('#newFeedName').val($(id).text().trim());
-        $('#spanDisplayTitle').css('display', 'none');
-        $('#spanEditTitle').css('display', 'inline');
+    function showArticlesLoadingOverlay(){
+        var overlayDiv = "<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>";
+        var articlesCard = $('#articles_card')
     }
-
-    function saveNewFeedName()
-    {
-        var feedId = getSelectedFeed();
-        var newname = $('#newFeedName').val().trim();
-        if (newname.length > 1) {
-
-            var id = '#feed' + feedId;
-            $(id).text(newname);
-            $('#spanTitle').text(newname);
-
-            $.ajax({
-                type: "POST",
-                url: '/?handler=editFeed&id=' + feedId + '&name=' + newname,
-                headers:
-                {
-                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                contentType: "application/json",
-                dataType: "json",
-                success: function (response) {
-                    selectFeed(feedId);
-                },
-                failure: function (response) {
-                    alert(response);
-                }
-            });
-        }
-        cancelFeedNameEdit();
-
-    }
-
-    function cancelFeedNameEdit()
-    {
-        $('#spanDisplayTitle').css('display', 'inline');
-        $('#spanEditTitle').css('display', 'none');
-    }
-
-
-    function markSelectedFeedRead()
-    {
-        $.ajax({
-            type: "POST",
-            url: '/?handler=markFeedAsRead&feedId=' + getSelectedFeed(),
-            headers:
-            {
-                "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-            },
-
-            success: function (response) {
-                $("div[id^='article']").css('font-weight', 'normal');
-                var feed = "#feed" + getSelectedFeed();
-                $(feed).css('font-weight', 'normal');
-            },
-            failure: function (response) {
-                alert(response);
-            }
-        });
-
-    }
-
-    function deleteSelectedFeed()
-    {
-        $.ajax({
-            type: "POST",
-            url: '/?handler=deleteFeed&feedId=' + getSelectedFeed(),
-            headers:
-            {
-                "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
-            },
-            contentType: "application/json",
-            dataType: "json",
-            success: function (response) {
-                location.href = location.href;
-            },
-            failure: function (response) {
-                alert(response);
-            }
-        });
+    function hideArticlesLoadingOverlay(){
 
     }
 
@@ -217,178 +159,49 @@
             url: '/admin/feed/GetOneFeed?feedId=' + feedId,
             contentType: "application/json",
             dataType: "json",
+            beforeSend: function() {
+              showArticlesLoadingOverlay();
+           },
             success: function (response) {
                 $('#tblArticles tr').remove();
+                $('#selectedFeedTitle').text(response.title);
+                if(response.articles.length > 0){
                 $.each(response.articles, function (i, article) {
 
                     var contentId = 'article' + article.id;
 
                     var font = 'font-weight: bold';
                     if (article.isProcessed) font = 'font-weight: normal';
-                    var text = '<div id="articlehead' + article.id + '" style="cursor:pointer;' + font + '"onclick="markAsRead(this,' + article.id + ');  showOrHide(\'' + contentId + '\');' + '">';
-                    text += article.title;
-                    text += "&nbsp;";
-                    text += '<a href="' + article.url + '" target="_blank">';
-                    text += '<span class="glyphicon glyphicon-share-alt"></span>';
-                    text += "</a>"
-                    text += "</div>";
-                    text += '<div style="display:none" id="' + contentId + '"> ';
-                   /* if (article.body > '') {
-                        text += article.body;
+                    var articleTitleCell = '<td><div id="articlehead' + article.id + '" style="cursor:pointer;' + font + '"onclick="markAsRead(this,' + article.id + ');  showOrHide(\'' + contentId + '\');' + '">';
+                    articleTitleCell += article.title;
+                    articleTitleCell += "&nbsp;";
+                    articleTitleCell += '<a href="' + article.url + '" target="_blank">';
+                    articleTitleCell += '<span class="fa fa-external-link-alt"></span>';
+                    articleTitleCell += "</a>"
+                    articleTitleCell += "</div>";
+                    articleTitleCell += '<div style="display:none" id="' + contentId + '"></td>';
+
+                    var publishDateCell = "<td>"+article.formattedPublishDate+"</td>";
+                    var hasBeenFeaturedCell = "<td></td>";
+                    if(article.hasBeenFeatured){
+                        hasBeenFeaturedCell = "<td><span class='badge badge-danger'>"+ article.formattedLastFeaturedDate +"</span></td>";
                     }
-                    text +=  '</div>';*/
-                    $('#tblArticles').append('<tr><td>' + text + "</td></tr>");
+                    var actionButtonsCell ="<td><a onclick='AddToFeatured()' class='btn btn-success btn-xs'>Add to Featured</a></td>";
+
+                    var articleRow = "<tr>" + articleTitleCell + publishDateCell + hasBeenFeaturedCell + actionButtonsCell +"</tr>";
+                    $('#tblArticles').append(articleRow);
                 });
+                }else{
+                    $('#tblArticles').append("<tr><td><div class='alert alert-warning'><h5> No Articles Found </h5></div></td></tr>");
+                }
             },
             failure: function (response) {
-                alert(response);
-            }
+                $('#tblArticles').append("<tr><td><div class='alert alert-danger'><h5> Something went wrong! </h5></div></td></tr>");
+            },
+             complete: function(){
+                 hideArticlesLoadingOverlay();
+             }
         });
-
-
     }
-    </script>
+</script>
 }
-
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>
-        RSS Feeds
-    </h1>
-</section>
-
-<!-- Main content -->
-<section class="content">
-    <div class="row">
-        <!-- left column -->
-        <div class="col-md-4">
-            <!-- general form elements -->
-            <div class="box box-primary">
-                <!-- /.box-header -->
-                <div id="divFeeds">
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body">
-                            
-                            <ul data-widget="treeview" id="feedTreeview" data-accordion="true">
-                                @foreach (var category in Model)
-                                {
-                                    <li class="treeview">
-                                        <a href="#">@category.Title</a>
-                                        <ul class="treeview-menu nav-link">
-                                            @foreach (var subcategory in category.SubCategories)
-                                            {<li >
-                                            <a href="#">@subcategory.Title</a>
-                                            <ul class="treeview-menu nav-link">
-
-                                                @foreach (var feed in subcategory.Feeds)
-                                                {
-                                                    if (feed.Blocked)
-                                                    {
-                                                        <li ><strike>@feed.Title</strike></li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li ><a onclick="selectFeed(@feed.Id);return false;">@feed.Title</a></li>
-                                                    }
-                                                }
-                                            </ul>
-                                            </li>
-                                            }
-                                        </ul>
-                                    </li>
-                                }
-                            </ul>
-                          </div>
-                    </div>
-                </div>
-
-               
-
-            </div>
-        </div>
-        <!--/.col (left) -->
-        <!-- right column -->
-        <div class="col-md-8">
-            <!-- Horizontal Form -->
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Search</h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                    <div class="box-body">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat">Go!</button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="box box-danger">
-                <div id="divArticles">
-                    <div class="panel panel-default">
-                        <div id="divArticleHeader" class="panel-heading">
-
-                            <span id="spanEditTitle" style="display:none">
-                                <input id="newFeedName" type="text" maxlength="50" class="form-control" style="display:inline; width: 500px" placeholder="New Feed Name" required>
-                                <button type="submit" onclick="saveNewFeedName();" class="btn btn-default">Save</button>
-                                <button type="submit" onclick="cancelFeedNameEdit();" class="btn btn-default">Cancel</button>
-                            </span>
-
-                            <span id="spanDisplayTitle">
-                                &nbsp;&nbsp;
-                                <a id="feedCollapse" onclick="feedCollapse(); return false;">
-                                    <span class="glyphicon glyphicon-chevron-left">
-                                    </span>
-                                </a>
-                                <a id="feedExpand" onclick="feedExpand(); return false;" style="display:none">
-                                    <span class="glyphicon glyphicon-chevron-right">
-                                    </span>
-                                </a>
-                                &nbsp;
-                                <span id="spanTitle">
-
-                                </span>
-                                &nbsp;
-                                <a href="#" id="feedLink" target="_blank" data-toggle="tooltip" title="Open Blog">
-                                    <span class="glyphicon glyphicon-share-alt"></span>
-                                </a>
-                                &nbsp;
-                                <a href="#" style="cursor:pointer" data-toggle="tooltip" title="Mark All As Read" onclick="markSelectedFeedRead(); return false;">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                </a>
-                                &nbsp;
-                                <a href="#" style="cursor:pointer" data-toggle="tooltip" title="Edit Name" onclick="editSelectedFeedName(); return false;">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </a>
-                                &nbsp;
-                                <span class="navbar-right">
-                                    <a href="#" style="cursor:pointer" data-toggle="tooltip" title="Delete this Blog" onclick="deleteSelectedFeed(); return false;">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </a>
-                                    &nbsp;&nbsp;
-                                </span>
-                            </span>
-                        </div>
-                        <div class="panel-body">
-                            <table id="tblArticles" class="table">
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <!-- /.box-body -->
-            </div>
-            <!--/.col (right) -->
-        </div>
-
-    </div><!-- /.row -->
-</section>
-<!-- /.content -->

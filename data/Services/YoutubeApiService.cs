@@ -74,12 +74,11 @@ namespace Curate.Data.Services
                     {
                         playlistChannel = new VideoChannel
                         {
-                            YoutubeChannelId = playlistItem.Snippet.ChannelId,
                             Slug = playlistItem.Snippet.ChannelTitle.GenerateSlug(),
                             Title = playlistItem.Snippet.ChannelTitle,
                             Url = $"https://www.youtube.com/channel/{playlistItem.Snippet.ChannelId}"
                         };
-                        var channel = _videoChannelRepository.List(c => c.YoutubeChannelId == playlistItem.Snippet.ChannelId).FirstOrDefault();
+                        var channel = _videoChannelRepository.List(c => c.Url.Contains(playlistItem.Snippet.ChannelId)).FirstOrDefault();
                         if (channel != null)
                         {
                             playlistChannel = channel;

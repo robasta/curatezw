@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Curate.Data.ViewModels.RssFeed
 {
@@ -16,6 +17,29 @@ namespace Curate.Data.ViewModels.RssFeed
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? PublishDate { get; set; }
         public IEnumerable<TagViewModel> Tags { get; set; }
-
+        public DateTime? LastFeaturedDate { get; set; }
+        public bool HasBeenFeatured => LastFeaturedDate != null;
+        public string FormattedPublishDate
+        {
+            get
+            {
+                if (PublishDate == null)
+                {
+                    return string.Empty;
+                }
+                return ((DateTime)PublishDate).ToString("dd MMM yyyy", CultureInfo.InvariantCulture);
+            }
+        }
+        public string FormattedLastFeaturedDate
+        {
+            get
+            {
+                if (LastFeaturedDate == null)
+                {
+                    return string.Empty;
+                }
+                return ((DateTime)LastFeaturedDate).ToString("dd MMM yyyy", CultureInfo.InvariantCulture);
+            }
+        }
     }
 }

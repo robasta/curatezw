@@ -1,5 +1,4 @@
-﻿using System;
-using Curate.Data.ViewModels.Identity;
+﻿using Curate.Data.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,6 @@ namespace Curate.Data.Models
             : base(options)
         {
         }
-
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<RssFeed> RssFeeds { get; set; }
         public virtual DbSet<RssFeedArticle> RssFeedArticles { get; set; }
@@ -284,8 +282,7 @@ namespace Curate.Data.Models
             {
                 entity.ToTable("VideoChannel");
 
-                entity.HasIndex(e => e.YoutubeChannelId, "IX_VideoChannel")
-                    .IsUnique();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ChannelCreationDate).HasColumnType("date");
 
@@ -297,7 +294,11 @@ namespace Curate.Data.Models
 
                 entity.Property(e => e.Url).IsRequired();
 
-                entity.Property(e => e.YoutubeChannelId).HasMaxLength(250);
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.VideoChannel)
+                    .HasForeignKey<VideoChannel>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_VideoChannel_RssFeed");
             });
 
             modelBuilder.Entity<VideoPlaylist>(entity =>
@@ -347,7 +348,7 @@ namespace Curate.Data.Models
             });
 
             OnModelCreatingPartial(modelBuilder);
-            base.OnModelCreating(modelBuilder);
+           base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

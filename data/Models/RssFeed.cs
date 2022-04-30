@@ -26,6 +26,7 @@ namespace Curate.Data.Models
         public string BlockedReason { get; set; }
 
         public virtual RssFeedSubtype RssFeedSubType { get; set; }
+        public virtual VideoChannel VideoChannel { get; set; }
         public virtual ICollection<RssFeedArticle> RssFeedArticles { get; set; }
     }
 }

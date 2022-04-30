@@ -21,9 +21,10 @@ namespace Curate.Data.Models
         public string Blurb { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? ChannelCreationDate { get; set; }
-        public string YoutubeChannelId { get; set; }
         public string Slug { get; set; }
+        public int? RssFeedId { get; set; }
 
+        public virtual RssFeed IdNavigation { get; set; }
         public virtual ICollection<TagVideoChannel> TagVideoChannels { get; set; }
         public virtual ICollection<VideoPlaylist> VideoPlaylists { get; set; }
         public virtual ICollection<Video> Videos { get; set; }
