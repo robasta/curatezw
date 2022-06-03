@@ -9,7 +9,7 @@ namespace Curate.Data.AutoMapper.Profiles
         private const string YoutubeBaseUrlEmbed = "https://www.youtube.com/embed/";
         public VideoProfile()
         {
-            CreateMap<Video, Models.Video>()
+           /* CreateMap<Video, Models.Video>()
                 .ForMember(dest=> dest.Title, opt => opt.MapFrom(src=>src.Snippet.Title))
                 .ForMember(dest=> dest.Blurb, opt => opt.MapFrom(src=>src.Snippet.Description))
                 .ForMember(dest => dest.YoutubeChannelTitle, opt => opt.MapFrom(src => src.Snippet.ChannelTitle))
@@ -31,6 +31,6 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest => dest.VideoUrl, opt => opt.MapFrom(src => $"{YoutubeBaseUrlEmbed}{src.Snippet.ResourceId.VideoId}"))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<PlaylistItemResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());
-        }
+       */ }
     }
 }

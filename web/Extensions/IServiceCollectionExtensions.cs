@@ -36,8 +36,7 @@ namespace Curate.Web.Extensions
             return services
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped<IRssFeedRepository, RssFeedRepository>()
-                .AddScoped<IRssFeedArticleRepository, RssFeedArticleRepository>()
-                .AddScoped<IRssFeedErrorRepository, RssFeedErrorRepository>()
+                .AddScoped<IArticleRepository, ArticleRepository>()
                 .AddScoped< IRssFeedCategoryRepository, RssFeedCategoryRepository>()
                 .AddScoped<IPostRepository, PostRepository>()
                 .AddScoped<IVideoRepository, VideoRepository>()

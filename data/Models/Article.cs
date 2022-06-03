@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 namespace Curate.Data.Models
 {
-    public partial class RssFeedArticle
+    public partial class Article
     {
-        public RssFeedArticle()
+        public Article()
         {
-            TagRssFeedArticles = new HashSet<TagRssFeedArticle>();
+            CollectionArticles = new HashSet<CollectionArticle>();
+            TagArticles = new HashSet<TagArticle>();
         }
 
         public int Id { get; set; }
@@ -18,14 +19,14 @@ namespace Curate.Data.Models
         public string ImageUrl { get; set; }
         public string Body { get; set; }
         public string Blurb { get; set; }
-        public bool IsProcessed { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? PublishDate { get; set; }
         public int? RssFeedId { get; set; }
-        public int? VideoId { get; set; }
+        public string Slug { get; set; }
 
+        public virtual Video IdNavigation { get; set; }
         public virtual RssFeed RssFeed { get; set; }
-        public virtual Video Video { get; set; }
-        public virtual ICollection<TagRssFeedArticle> TagRssFeedArticles { get; set; }
+        public virtual ICollection<CollectionArticle> CollectionArticles { get; set; }
+        public virtual ICollection<TagArticle> TagArticles { get; set; }
     }
 }

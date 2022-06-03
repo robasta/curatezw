@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace Curate.Data.Models
 {
-    public partial class TagRssFeedArticle
+    public partial class TagArticle
     {
         public int ArticleId { get; set; }
         public int TagId { get; set; }
 
-        public virtual RssFeedArticle Article { get; set; }
+        public virtual Article Article { get; set; }
         public virtual Tag Tag { get; set; }
     }
 }

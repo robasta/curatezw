@@ -2,7 +2,7 @@
 
 namespace Curate.Data.Repositories.Interfaces
 {
-    public interface IRssFeedCategoryRepository : IRepository<RssFeedType>
+    public interface IRssFeedCategoryRepository : IRepository<Category>
     {
     }
 }

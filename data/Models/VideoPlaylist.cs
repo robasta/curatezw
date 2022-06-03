@@ -20,10 +20,7 @@ namespace Curate.Data.Models
         public DateTime? LastModifiedDate { get; set; }
         public string YoutubeChannelId { get; set; }
         public string Slug { get; set; }
-        public string YoutubeChannelTitle { get; set; }
-        public int ChannelId { get; set; }
 
-        public virtual VideoChannel Channel { get; set; }
         public virtual ICollection<VideoPlaylistVideo> VideoPlaylistVideos { get; set; }
     }
 }

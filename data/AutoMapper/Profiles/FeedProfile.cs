@@ -16,11 +16,11 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.WebsiteUrl, opt => opt.MapFrom(src => src.HtmlUrl))
                 .ForMember(dest=> dest.LastUpdated, opt => opt.MapFrom(src=>src.LastUpdated))
-                .ForMember(dest=> dest.Category, opt => opt.MapFrom(src=>src.RssFeedSubType.ParentType))
-                .ForMember(dest => dest.SubCategory, opt=> opt.MapFrom(src=> src.RssFeedSubType))
+                .ForMember(dest=> dest.Category, opt => opt.MapFrom(src=>src.SubCategory.Category))
+                .ForMember(dest => dest.SubCategory, opt=> opt.MapFrom(src=> src.SubCategory))
                 .ForMember(dest => dest.Blocked, opt=> opt.MapFrom(src=> src.Blocked))
                 .ForMember(dest => dest.BlockedReason, opt=> opt.MapFrom(src=> src.BlockedReason))
-                .ForMember(dest => dest.Articles, opt=> opt.MapFrom(src=> src.RssFeedArticles))
+                .ForMember(dest => dest.Articles, opt=> opt.MapFrom(src=> src.Articles))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<FeedResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());
         }

@@ -66,24 +66,24 @@ namespace Curate.Data.Services
                 foreach (var playlistItem in playlistItemsListResponse.Items)
                 {
                     var curateVideo = _mapper.Map<Video>(playlistItem);
-                    curateVideo.LastModifiedDate = DateTime.Now;
+                   // curateVideo.LastModifiedDate = DateTime.Now;
 
                     if (playlistChannel == null && !string.IsNullOrWhiteSpace(playlistItem.Snippet.ChannelId))
                     {
                         playlistChannel = new VideoChannel
                         {
                             Slug = playlistItem.Snippet.ChannelTitle.GenerateSlug(),
-                            Title = playlistItem.Snippet.ChannelTitle,
-                            Url = $"https://www.youtube.com/channel/{playlistItem.Snippet.ChannelId}"
+                            //Title = playlistItem.Snippet.ChannelTitle,
+                           // Url = $"https://www.youtube.com/channel/{playlistItem.Snippet.ChannelId}"
                         };
-                        var channel = _videoChannelRepository.List(c => c.Url.Contains(playlistItem.Snippet.ChannelId)).FirstOrDefault();
-                        if (channel != null)
-                        {
-                            playlistChannel = channel;
-                        }
+                       // var channel = _videoChannelRepository.List(c => c.Url.Contains(playlistItem.Snippet.ChannelId)).FirstOrDefault();
+                        //if (channel != null)
+                       // {
+                          //  playlistChannel = channel;
+                       // }
                     }
-                    videoPlaylist.Channel = playlistChannel;
-                    curateVideo.Channel = playlistChannel;
+                   // videoPlaylist.Channel = playlistChannel;
+                    //curateVideo.Channel = playlistChannel;
                     var videoPlaylistVideo = new VideoPlaylistVideo { Video = curateVideo};
                     if (playlistItem.Snippet.Position != null)
                     {

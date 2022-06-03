@@ -8,10 +8,10 @@ namespace Curate.Data.AutoMapper.Profiles
     {
         public FeedSubCategoryProfile()
         {
-            CreateMap<Models.RssFeedSubtype, FeedSubCategoryViewModel>()
+            CreateMap<Models.SubCategory, FeedSubCategoryViewModel>()
                 .ForMember(dest=> dest.Title, opt => opt.MapFrom(src=>src.Title))
                 .ForMember(dest=> dest.Id, opt => opt.MapFrom(src=>src.Id))
-                .ForMember(dest=> dest.ParentCategory, opt => opt.MapFrom(src=>src.ParentType))
+                .ForMember(dest=> dest.ParentCategory, opt => opt.MapFrom(src=>src.Category))
                 .ForMember(dest => dest.Feeds, opt => opt.MapFrom(src=> src.RssFeeds))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<FeedSubCategoryResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());

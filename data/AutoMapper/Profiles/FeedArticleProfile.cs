@@ -8,7 +8,7 @@ namespace Curate.Data.AutoMapper.Profiles
     {
         public FeedArticleProfile()
         {
-            CreateMap<Models.RssFeedArticle, FeedArticleViewModel>()
+            CreateMap<Models.Article, FeedArticleViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest=> dest.Title, opt => opt.MapFrom(src=>src.Title))
                 .ForMember(dest=> dest.Body, opt => opt.MapFrom(src=>src.Body))
@@ -16,9 +16,8 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src=>src.ImageUrl))
                 .ForMember(dest => dest.PublishDate, opt => opt.MapFrom(src => src.PublishDate))
                 .ForMember(dest=> dest.LastModifiedDate, opt => opt.MapFrom(src=>src.LastModifiedDate))
-                .ForMember(dest=> dest.Tags, opt => opt.MapFrom(src=>src.TagRssFeedArticles))
+                .ForMember(dest=> dest.Tags, opt => opt.MapFrom(src=>src.TagArticles))
                 .ForMember(dest=> dest.FeedId, opt => opt.MapFrom(src=>src.RssFeedId))
-                .ForMember(dest=> dest.Video, opt => opt.MapFrom(src=>src.Video))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<FeedArticleResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());
         }

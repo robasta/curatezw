@@ -3,9 +3,9 @@ using Curate.Data.Repositories.Interfaces;
 
 namespace Curate.Data.Repositories
 {
-    public class RssFeedArticleRepository : Repository<RssFeedArticle>, IRssFeedArticleRepository
+    public class ArticleRepository : Repository<Article>, IArticleRepository
     {
-        public RssFeedArticleRepository(DbFactory dbFactory) : base(dbFactory)
+        public ArticleRepository(DbFactory dbFactory) : base(dbFactory)
         {
         }
     }

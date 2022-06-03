@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace Curate.Data.Models
 {
-    public partial class RssFeedType
+    public partial class Category
     {
-        public RssFeedType()
+        public Category()
         {
-            RssFeedSubtypes = new HashSet<RssFeedSubtype>();
+            SubCategories = new HashSet<SubCategory>();
         }
 
         public int Id { get; set; }
         public string Title { get; set; }
 
-        public virtual ICollection<RssFeedSubtype> RssFeedSubtypes { get; set; }
+        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

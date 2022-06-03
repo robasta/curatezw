@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace Curate.Data.Models
 {
-    public partial class RssFeedSubtype
+    public partial class SubCategory
     {
-        public RssFeedSubtype()
+        public SubCategory()
         {
             RssFeeds = new HashSet<RssFeed>();
         }
 
         public int Id { get; set; }
         public string Title { get; set; }
-        public int? ParentTypeId { get; set; }
+        public int CategoryId { get; set; }
 
-        public virtual RssFeedType ParentType { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<RssFeed> RssFeeds { get; set; }
     }
 }

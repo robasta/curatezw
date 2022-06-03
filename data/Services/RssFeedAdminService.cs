@@ -21,15 +21,14 @@ namespace Curate.Data.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRssFeedRepository _feedRepository;
-        private readonly IRssFeedArticleRepository _feedArticleRepository;
+        private readonly IArticleRepository _feedArticleRepository;
         private readonly IRssFeedCategoryRepository _feedCategoryRepository;
-        private readonly IRssFeedErrorRepository _feedErrorRepository;
         private readonly IYoutubeApiService _youTubeApiService;
 
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository, IRssFeedArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper, IRssFeedCategoryRepository feedCategoryRepository, IRssFeedErrorRepository feedErrorRepository, IYoutubeApiService youTubeService)
+        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository, IArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper, IRssFeedCategoryRepository feedCategoryRepository, IYoutubeApiService youTubeService)
 
         {
             _unitOfWork = unitOfWork;
@@ -38,7 +37,6 @@ namespace Curate.Data.Services
             _logger = logger;
             _mapper = mapper;
             _feedCategoryRepository = feedCategoryRepository;
-            _feedErrorRepository = feedErrorRepository;
             _youTubeApiService = youTubeService;
         }
 
@@ -70,24 +68,23 @@ namespace Curate.Data.Services
                     var dbArticle = _feedArticleRepository.List(a => a.Url == itemUrl).FirstOrDefault();
                     if (dbArticle == null)
                     {
-                        var article = new RssFeedArticle
+                        var article = new Article
                         {
                             Body = item.Content,
                             Url = itemUrl,
                             PublishDate = DateTime.Parse(item.PublishingDateString),
                             LastModifiedDate = DateTime.Now,
-                            IsProcessed = false,
                             Title = item.Title,
                             RssFeedId = feed.Id,
                         };
 
-                        if (feed.RssFeedSubType.ParentType.Id == (int)SourceType.Video)
+                        if (feed.SubCategory.CategoryId == (int)SourceType.Video)
                         {
                             var videoId = YoutubeHelper.GetVideoIdFromUrl(article.Url);
                             if (!string.IsNullOrWhiteSpace(videoId))
                             {
                                 var video = await _youTubeApiService.GetVideoById(videoId);
-                                article.Video = video;
+                                //article. = video;
                             }
                         }
 
@@ -97,15 +94,6 @@ namespace Curate.Data.Services
             }
             catch (Exception ex)
             {
-                var feedError = new RssFeedError
-                {
-                    ErrorDate = DateTime.Now,
-                    ErrorMessage = ex.Message,
-                    Url = feed.XmlUrl,
-                    RssFeedId = feed.Id,
-                    RssFeedTitle = feed.Title
-                };
-                _feedErrorRepository.Add(feedError);
                 _logger.LogError(ex,"Feed error");
             }
             
@@ -135,7 +123,7 @@ namespace Curate.Data.Services
 
         public List<FeedCategoryViewModel> GetAllCategorizedFeeds()
         {
-            var categories = _feedCategoryRepository.All("RssFeedSubtypes,RssFeedSubtypes.RssFeeds,RssFeedSubtypes.RssFeeds.RssFeedArticles");
+            var categories = _feedCategoryRepository.All("SubCategorys,SubCategorys.RssFeeds,SubCategorys.RssFeeds.Articles");
             var viewModel = _mapper.Map<List<FeedCategoryViewModel>>(categories);
           
             return viewModel;
@@ -143,15 +131,15 @@ namespace Curate.Data.Services
 
         public FeedArticleViewModel GetFeedArticle(int id)
         {
-            var rssFeedArticle =
-                _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagRssFeedArticles.Tag");
-            var viewModel = _mapper.Map<FeedArticleViewModel>(rssFeedArticle);
+            var Article =
+                _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagArticles.Tag");
+            var viewModel = _mapper.Map<FeedArticleViewModel>(Article);
             return viewModel;
         }
 
         public FeedViewModel GetFeed(int feedId)
         {
-            var rssFeed =  _feedRepository.GetOneByFilter(i => i.Id == feedId && !i.Blocked, "RssFeedArticles"); //,RssFeedSubType,RssFeedSubType.ParentType
+            var rssFeed =  _feedRepository.GetOneByFilter(i => i.Id == feedId && !i.Blocked, "Articles"); //,SubCategory,SubCategory.ParentType
             var viewModel =  _mapper.Map<FeedViewModel>(rssFeed);
             return viewModel;
         }
@@ -175,7 +163,7 @@ namespace Curate.Data.Services
                                 Title = feed.Title?.Trim(),
                                 XmlUrl = feed.XmlUrl?.Trim(),
                                 Url = string.IsNullOrWhiteSpace(feed.HtmlUrl) ? feed.XmlUrl?.Trim() : feed.HtmlUrl?.Trim(),
-                                RssFeedSubTypeId = outline.SubTypeId,
+                                SubCategoryId = outline.SubTypeId,
                             };
                             _feedRepository.Add(rssFeed);
 

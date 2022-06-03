@@ -11,6 +11,5 @@ namespace Curate.Data.Models
         public int VideoChannelId { get; set; }
 
         public virtual Tag Tag { get; set; }
-        public virtual VideoChannel VideoChannel { get; set; }
     }
 }

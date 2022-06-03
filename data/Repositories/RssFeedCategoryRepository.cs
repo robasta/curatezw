@@ -3,7 +3,7 @@ using Curate.Data.Repositories.Interfaces;
 
 namespace Curate.Data.Repositories
 {
-    public class RssFeedCategoryRepository : Repository<RssFeedType>, IRssFeedCategoryRepository
+    public class RssFeedCategoryRepository : Repository<Category>, IRssFeedCategoryRepository
     {
         public RssFeedCategoryRepository(DbFactory dbFactory) : base(dbFactory)
         {

@@ -5,9 +5,9 @@ using Curate.Data.ViewModels.RssFeed;
 
 namespace Curate.Data.AutoMapper.Resolvers
 {
-    public class FeedCategoryResolver : IValueResolver<RssFeedType, FeedCategoryViewModel, string>
+    public class FeedCategoryResolver : IValueResolver<Category, FeedCategoryViewModel, string>
     {
-        public string Resolve(RssFeedType source, FeedCategoryViewModel destination, string destMember, ResolutionContext context)
+        public string Resolve(Category source, FeedCategoryViewModel destination, string destMember, ResolutionContext context)
         {
             return source.Title.GenerateSlug();
         }

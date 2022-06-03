@@ -18,13 +18,13 @@
         <div class="col-8 mt-1 mb-4">
             <div class="post-title mb-4">
                 <!-- title -->
-                <h1 class="entry-title display-4 display-2-lg mt-2">@Model.Title</h1>
+                <h1 class="entry-title display-4 display-2-lg mt-2">@*@Model.Title*@</h1>
                 <!-- atribute -->
                 <div class="post-atribute mb-3">
                     <div class="my-3 text-muted small">
                         <!--author-->
                         <span class="d-none d-sm-inline">
-                            by <a class="fw-bold" href="../category/author.html">@Model.Channel?.Title</a>
+                            by <a class="fw-bold" href="../category/author.html">@*@Model.Channel?.Title*@</a>
                         </span>
                         <!--date-->
                         <time class="ms-0 ms-sm-2 ms-md-3" datetime="2019-10-22">
@@ -83,11 +83,11 @@
                     </div>
                 </div>
             </div>
-            <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+            @*<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
                 <div class="wp-block-embed__wrapper">
                     <iframe title="@Model.Title" width="750" height="422" src="@Model.VideoUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                 </div><figcaption> @Model.Blurb </figcaption>
-            </figure>
+            </figure>*@
         </div>
         <partial name="Asides/_VideoAside" />
     </div>

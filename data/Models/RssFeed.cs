@@ -9,10 +9,10 @@ namespace Curate.Data.Models
     {
         public RssFeed()
         {
-            RssFeedArticles = new HashSet<RssFeedArticle>();
+            Articles = new HashSet<Article>();
         }
 
-        public int? RssFeedSubTypeId { get; set; }
+        public int? SubCategoryId { get; set; }
         public int Id { get; set; }
         public string Url { get; set; }
         public string Title { get; set; }
@@ -24,9 +24,8 @@ namespace Curate.Data.Models
         public string XmlUrl { get; set; }
         public bool Blocked { get; set; }
         public string BlockedReason { get; set; }
-
-        public virtual RssFeedSubtype RssFeedSubType { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
         public virtual VideoChannel VideoChannel { get; set; }
-        public virtual ICollection<RssFeedArticle> RssFeedArticles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

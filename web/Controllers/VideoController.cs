@@ -29,7 +29,7 @@ namespace Curate.Web.Controllers
             {
                 return StatusCode(404);
             }
-            ViewBag.Title = video.Title;
+           // ViewBag.Title = video.Title;
             return View(video);
         }
 
