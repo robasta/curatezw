@@ -24,6 +24,7 @@ namespace Curate.Data.Models
         public int? ChannelId { get; set; }
         public string YoutubeCategory { get; set; }
         public string YoutubeChannelId { get; set; }
+        public string VideoId { get; set; }
         public string YoutubeChannelTitle { get; set; }
         public string Slug { get; set; }
 

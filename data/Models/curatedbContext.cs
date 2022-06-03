@@ -1,6 +1,8 @@
-﻿using Curate.Data.ViewModels.Identity;
+﻿using System;
+using Curate.Data.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -16,7 +18,7 @@ namespace Curate.Data.Models
             : base(options)
         {
         }
-
+        
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<RssFeed> RssFeeds { get; set; }
         public virtual DbSet<RssFeedArticle> RssFeedArticles { get; set; }
@@ -248,6 +250,10 @@ namespace Curate.Data.Models
                 entity.Property(e => e.Slug).HasMaxLength(250);
 
                 entity.Property(e => e.Title).IsRequired();
+
+                entity.Property(e => e.VideoId)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.VideoUrl).IsRequired();
 
