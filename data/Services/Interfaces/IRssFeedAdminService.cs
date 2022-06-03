@@ -11,5 +11,6 @@ namespace Curate.Data.Services.Interfaces
         public Task<bool> ScanOneRssFeed(int feedId);
         public FeedViewModel GetFeed(int feedId);
         public List<FeedCategoryViewModel> GetAllCategorizedFeeds();
+        public FeedArticleViewModel GetFeedArticle(int id);
     }
 }

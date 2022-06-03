@@ -11,11 +11,13 @@ namespace Curate.Data.Services
         private readonly IVideoRepository _videoRepository;
         private readonly IVideoPlaylistRepository _videoPlaylistRepository;
         private readonly IVideoChannelRepository _videoChannelRepository;
-        public VideoService(IVideoRepository videoRepository, IVideoPlaylistRepository videoPlaylistRepository, IVideoChannelRepository videoChannelRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public VideoService(IVideoRepository videoRepository, IVideoPlaylistRepository videoPlaylistRepository, IVideoChannelRepository videoChannelRepository, IUnitOfWork unitOfWork)
         {
             _videoRepository = videoRepository;
             _videoPlaylistRepository = videoPlaylistRepository;
             _videoChannelRepository = videoChannelRepository;
+            _unitOfWork = unitOfWork;
         }
         public Video GetVideo(int id)
         {
@@ -35,6 +37,7 @@ namespace Curate.Data.Services
         public void CreateChannel(VideoChannel channel)
         {
             _videoChannelRepository.Add(channel);
+            _unitOfWork.CommitAsync();
         }
 
         public IEnumerable<VideoChannel> GetAllChannels()

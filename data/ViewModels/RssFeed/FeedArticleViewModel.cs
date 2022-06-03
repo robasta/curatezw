@@ -17,6 +17,7 @@ namespace Curate.Data.ViewModels.RssFeed
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? PublishDate { get; set; }
         public IEnumerable<TagViewModel> Tags { get; set; }
+        public  int FeedId { get; set; }
         public DateTime? LastFeaturedDate { get; set; }
         public bool HasBeenFeatured => LastFeaturedDate != null;
         public string FormattedPublishDate

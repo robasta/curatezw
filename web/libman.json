@@ -63,6 +63,7 @@
       "destination": "wwwroot/lib/jszip/"
     },
     {
+      "provider": "unpkg",
       "library": "pdfmake@0.2.5",
       "destination": "wwwroot/lib/pdfmake/"
     },

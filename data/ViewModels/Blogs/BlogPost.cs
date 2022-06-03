@@ -1,6 +1,6 @@
 ﻿namespace Curate.Data.ViewModels.Blogs
 {
-    public class Blog
+    public class BlogPost
     {
        
             public string Url { get; set; }

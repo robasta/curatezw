@@ -12,15 +12,15 @@ namespace Curate.Data.ViewModels.Composites
 
         public List<Post> FeaturedNyambo { get; set; }
 
-        public List<Blog> FeaturedBlogs { get; set; }
+        public List<BlogPost> FeaturedBlogPosts { get; set; }
 
-        public List<Podcast> FeaturedPodcasts { get; set; }
+        public List<PodcastEpisode> FeaturedPodcastEpisodes { get; set; }
 
         public List<VideoChannel> FeaturedBchannels { get; set; }
 
         public List<Tag> FeaturedTags { get; set; }
 
-        public List<VideoPlaylist> FeaturedBplaylist { get; set; }
+        public List<VideoPlaylist> FeaturedPlaylists { get; set; }
 
         /* TODO
          

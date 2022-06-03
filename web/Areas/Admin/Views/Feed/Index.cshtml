@@ -124,130 +124,139 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Extra Large Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+                    <div class="wp-block-embed__wrapper">
+                        <iframe title="yolo" width="750" height="422" src="https://www.youtube.com/watch?v=EDyrfRDj1Wo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </div><figcaption> Yolo </figcaption>
+                    </figure>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 </section>
 <!-- /.content -->
 @section scripts
 {
-@await Html.PartialAsync("_DatatablesScripts")
+    @await Html.PartialAsync("_DatatablesScripts")
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('ul').Treeview({
-            "trigger":"[data-widget='treeview'] .nav-link"
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('ul').Treeview({
+                "trigger": "[data-widget='treeview'] .nav-link"
+            });
+            @if (Model.Count() > 0)
+            {
+                @:selectFeed(@Model.First().Id, true);
+            }
         });
-        @if (Model.Count() > 0)
-        {
-            @:selectFeed(@Model.First().Id, true);
+
+        function getSelectedFeed() {
+            return $('#selectedFeedId').val();
         }
-        //$("#tblArticles").DataTable({"responsive": true, "lengthChange": true, "autoWidth": true});
-    });
 
-    function getSelectedFeed() {
-        return $('#selectedFeedId').val();
-    }
+        function showArticlesLoadingOverlay() {
+            var overlayDiv = "<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>";
+            var articlesCard = $('#articles_card')
+        }
 
-    function showArticlesLoadingOverlay(){
-        var overlayDiv = "<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>";
-        var articlesCard = $('#articles_card')
-    }
-    function hideArticlesLoadingOverlay(){
+        function hideArticlesLoadingOverlay() {
 
-    }
+        }
 
-    function selectFeed(feedId, initDatatables) {
-        $('#selectedFeedId').val(feedId);
+        function selectFeed(feedId, initDatatables) {
+            $('#selectedFeedId').val(feedId);
 
-        $.ajax({
-            type: "GET",
-            url: '/admin/feed/GetOneFeed?feedId=' + feedId,
-            contentType: "application/json",
-            dataType: "json",
-            beforeSend: function() {
-              showArticlesLoadingOverlay();
-              //$("#tblArticles").destroy();
-           },
-            success: function (response) {
+            $.ajax({
+                type: "GET",
+                url: '/admin/feed/GetOneFeed?feedId=' + feedId,
+                contentType: "application/json",
+                dataType: "json",
+                beforeSend: function() {
+                    showArticlesLoadingOverlay();
+                },
+                success: function(response) {
+                    $('#selectedFeedTitle').text(response.title);
 
-                //$('#tblArticles tr').remove();
-                $('#selectedFeedTitle').text(response.title);
+                    if (response.articles.length > 0) {
+                        if (initDatatables) {
+                            $('#tblArticles').DataTable({
+                                data: response.articles,
+                                columns: [
+                                    { data: 'publishDate' },
+                                    { data: 'title' },
+                                    {
+                                        data: null,
+                                        orderable: false,
+                                        render: function(data, type, row) {
+                                            return "<a href='" + row.url + "' target='_blank'><span class='fa fa-external-link-alt'></span></a>"
+                                        }
+                                    },
+                                    {
+                                        data: null,
+                                        orderable: false,
+                                        render: function (data, type, row) {
 
-                if(response.articles.length > 0){
-                    if(initDatatables){
-                     $('#tblArticles').DataTable({
-                            data: response.articles,
-                            columns: [
-                                { data: 'title'},
-                                { data: null,
-                                  orderable: false,
-                                  render: function(data, type, row){
-                                      return "<a href='" + row.url + "' target='_blank'><span class='fa fa-external-link-alt'></span></a>"
-                                  }
-                                },
-                                { data: 'publishDate' },
-                                { data: 'lastFeaturedDate' },
-                                { data: 'url' },
-                                { data: null,
-                                  render: function ( data, type, row ) {
-                                        if(row.hasBeenFeatured)
-                                            return "<span class='badge badge-danger'>"+ row.formattedLastFeaturedDate + "</span>";
-                                        return "";
+                                            return "<button type='button' class='btn btn-default' data-toggle='modal' data-target='#modal-xl'>Preview</button>";
+                                        }
+                                    },
+                                   
+                                    { data: 'lastFeaturedDate' },
+                                    { data: 'url' },
+                                    {
+                                        data: null,
+                                        render: function(data, type, row) {
+                                            if (row.hasBeenFeatured)
+                                                return "<span class='badge badge-danger'>" + row.formattedLastFeaturedDate + "</span>";
+                                            return "";
+                                        }
+                                    },
+                                    {
+                                        data: null,
+                                        className: "dt-center editor-edit",
+                                        orderable: false,
+                                        render: function(data, type, row) {
+                                           return "<a href='/Admin/Feed/EditFeedArticle?id=" + row.id + "&fetch_data=true' target='blank' class='btn btn-success btn-xs'>Add to Featured</a>"
+                                        }
                                     }
-                                },
-                                { data: null,
-                                    className: "dt-center editor-edit",
-                                    defaultContent: "<a onclick='AddToFeatured()' class='btn btn-success btn-xs'>Add to Featured</a>",
-                                    orderable: false
-                                }
-                            ],
-                            /*responsive: true,
-                            lengthChange: true,
-                            autoWidth: true*/
-                        });
-                    }
-                    else{
-                        var datatable = $("#tblArticles").DataTable();
-                        datatable.clear();
-                        datatable.rows.add(response.articles);
-                        datatable.draw();
+                                ],
+                                order: [[0, 'desc']]
+                            });
+                        } else {
+                            var datatable = $("#tblArticles").DataTable();
+                            datatable.clear();
+                            datatable.rows.add(response.articles);
+                            datatable.draw();
+
+                        }
                        
+                    } else {
+                        $('#tblArticles').append("<tr><td><div class='alert alert-warning'><h5> No Articles Found </h5></div></td></tr>");
                     }
-               /* $.each(response.articles, function (i, article) {
-
-                    var contentId = 'article' + article.id;
-
-                    var font = 'font-weight: bold';
-                    if (article.isProcessed) font = 'font-weight: normal';
-                    var articleTitleCell = '<td><div id="articlehead' + article.id + '" style="cursor:pointer;' + font + '"onclick="markAsRead(this,' + article.id + ');  showOrHide(\'' + contentId + '\');' + '">';
-                    articleTitleCell += article.title;
-                    articleTitleCell += "&nbsp;";
-                    articleTitleCell += '<a href="' + article.url + '" target="_blank">';
-                    articleTitleCell += '<span class="fa fa-external-link-alt"></span>';
-                    articleTitleCell += "</a>"
-                    articleTitleCell += "</div>";
-                    articleTitleCell += '<div style="display:none" id="' + contentId + '"></td>';
-
-                    var publishDateCell = "<td>"+article.formattedPublishDate+"</td>";
-                    var hasBeenFeaturedCell = "<td></td>";
-                    if(article.hasBeenFeatured){
-                        hasBeenFeaturedCell = "<td><span class='badge badge-danger'>"+ article.formattedLastFeaturedDate +"</span></td>";
-                    }
-                    var actionButtonsCell ="<td><a onclick='AddToFeatured()' class='btn btn-success btn-xs'>Add to Featured</a></td>";
-
-                    var articleRow = "<tr>" + articleTitleCell + publishDateCell + hasBeenFeaturedCell + actionButtonsCell +"</tr>";
-                    $('#tblArticles').append(articleRow);
-                   
-                }); */
-                }else{
-                    $('#tblArticles').append("<tr><td><div class='alert alert-warning'><h5> No Articles Found </h5></div></td></tr>");
+                },
+                failure: function(response) {
+                    $('#tblArticles').append("<tr><td><div class='alert alert-danger'><h5> Something went wrong! </h5></div></td></tr>");
+                },
+                complete: function() {
+                    hideArticlesLoadingOverlay();
                 }
-            },
-            failure: function (response) {
-                $('#tblArticles').append("<tr><td><div class='alert alert-danger'><h5> Something went wrong! </h5></div></td></tr>");
-            },
-             complete: function(){
-                 hideArticlesLoadingOverlay();
-             }
-        });
-    }
-</script>
+            });
+        }
+    </script>
 }

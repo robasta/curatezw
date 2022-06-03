@@ -125,6 +125,14 @@ namespace Curate.Data.Services
             return viewModel;
         }
 
+        public FeedArticleViewModel GetFeedArticle(int id)
+        {
+            var rssFeedArticle =
+                _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagRssFeedArticles.Tag");
+            var viewModel = _mapper.Map<FeedArticleViewModel>(rssFeedArticle);
+            return viewModel;
+        }
+
         public FeedViewModel GetFeed(int feedId)
         {
             var rssFeed =  _feedRepository.GetOneByFilter(i => i.Id == feedId && !i.Blocked, "RssFeedArticles"); //,RssFeedSubType,RssFeedSubType.ParentType

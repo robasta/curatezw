@@ -1,6 +1,8 @@
-﻿using Curate.Data.ViewModels.Identity;
+﻿using System;
+using Curate.Data.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -16,6 +18,7 @@ namespace Curate.Data.Models
             : base(options)
         {
         }
+
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<RssFeed> RssFeeds { get; set; }
         public virtual DbSet<RssFeedArticle> RssFeedArticles { get; set; }
@@ -85,16 +88,19 @@ namespace Curate.Data.Models
             {
                 entity.ToTable("RssFeedArticle");
 
+                entity.Property(e => e.Blurb).HasMaxLength(250);
+
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.PublishDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Title).IsRequired();
 
                 entity.Property(e => e.Url).IsRequired();
 
                 entity.HasOne(d => d.RssFeed)
                     .WithMany(p => p.RssFeedArticles)
                     .HasForeignKey(d => d.RssFeedId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_RssFeedArticle_RssFeed");
             });
 
@@ -348,7 +354,7 @@ namespace Curate.Data.Models
             });
 
             OnModelCreatingPartial(modelBuilder);
-           base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

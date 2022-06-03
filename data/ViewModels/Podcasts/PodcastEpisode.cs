@@ -2,7 +2,7 @@
 
 namespace Curate.Data.ViewModels.Podcasts
 {
-    public class Podcast
+    public class PodcastEpisode
     {
 
         public string Url { get; set; }
