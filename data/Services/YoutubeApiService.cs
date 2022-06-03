@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,7 +8,6 @@ using Curate.Data.Services.Interfaces;
 using Curate.Data.Utils;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using Google.Apis.YouTube.v3.Data;
 using Video = Curate.Data.Models.Video;
 
 namespace Curate.Data.Services

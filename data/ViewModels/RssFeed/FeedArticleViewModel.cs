@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Curate.Data.Models;
 
 namespace Curate.Data.ViewModels.RssFeed
 {
@@ -18,6 +19,7 @@ namespace Curate.Data.ViewModels.RssFeed
         public DateTime? PublishDate { get; set; }
         public IEnumerable<TagViewModel> Tags { get; set; }
         public  int FeedId { get; set; }
+        public Video Video { get; set; }
         public DateTime? LastFeaturedDate { get; set; }
         public bool HasBeenFeatured => LastFeaturedDate != null;
         public string FormattedPublishDate

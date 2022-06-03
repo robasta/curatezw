@@ -9,7 +9,7 @@ namespace Curate.Data.Models
     {
         public Video()
         {
-            TagVideos = new HashSet<TagVideo>();
+            RssFeedArticles = new HashSet<RssFeedArticle>();
             VideoPlaylistVideos = new HashSet<VideoPlaylistVideo>();
         }
 
@@ -28,7 +28,7 @@ namespace Curate.Data.Models
         public string Slug { get; set; }
 
         public virtual VideoChannel Channel { get; set; }
-        public virtual ICollection<TagVideo> TagVideos { get; set; }
+        public virtual ICollection<RssFeedArticle> RssFeedArticles { get; set; }
         public virtual ICollection<VideoPlaylistVideo> VideoPlaylistVideos { get; set; }
     }
 }

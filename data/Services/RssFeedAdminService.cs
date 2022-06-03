@@ -10,6 +10,8 @@ using Curate.Data.Exceptions;
 using Curate.Data.Models;
 using Curate.Data.Repositories.Interfaces;
 using Curate.Data.Services.Interfaces;
+using Curate.Data.Utils;
+using Curate.Data.ViewModels;
 using Curate.Data.ViewModels.RssFeed;
 using Microsoft.Extensions.Logging;
 
@@ -22,10 +24,12 @@ namespace Curate.Data.Services
         private readonly IRssFeedArticleRepository _feedArticleRepository;
         private readonly IRssFeedCategoryRepository _feedCategoryRepository;
         private readonly IRssFeedErrorRepository _feedErrorRepository;
+        private readonly IYoutubeApiService _youTubeApiService;
+
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository, IRssFeedArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper, IRssFeedCategoryRepository feedCategoryRepository, IRssFeedErrorRepository feedErrorRepository)
+        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository, IRssFeedArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper, IRssFeedCategoryRepository feedCategoryRepository, IRssFeedErrorRepository feedErrorRepository, IYoutubeApiService youTubeService)
 
         {
             _unitOfWork = unitOfWork;
@@ -35,6 +39,7 @@ namespace Curate.Data.Services
             _mapper = mapper;
             _feedCategoryRepository = feedCategoryRepository;
             _feedErrorRepository = feedErrorRepository;
+            _youTubeApiService = youTubeService;
         }
 
         private async Task ProcessRssFeed(RssFeed feed)
@@ -75,6 +80,17 @@ namespace Curate.Data.Services
                             Title = item.Title,
                             RssFeedId = feed.Id,
                         };
+
+                        if (feed.RssFeedSubType.ParentType.Id == (int)SourceType.Video)
+                        {
+                            var videoId = YoutubeHelper.GetVideoIdFromUrl(article.Url);
+                            if (!string.IsNullOrWhiteSpace(videoId))
+                            {
+                                var video = await _youTubeApiService.GetVideoById(videoId);
+                                article.Video = video;
+                            }
+                        }
+
                         _feedArticleRepository.Add(article);
                     }
                 }

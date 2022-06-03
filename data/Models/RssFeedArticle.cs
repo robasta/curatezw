@@ -22,8 +22,10 @@ namespace Curate.Data.Models
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? PublishDate { get; set; }
         public int? RssFeedId { get; set; }
+        public int? VideoId { get; set; }
 
         public virtual RssFeed RssFeed { get; set; }
+        public virtual Video Video { get; set; }
         public virtual ICollection<TagRssFeedArticle> TagRssFeedArticles { get; set; }
     }
 }

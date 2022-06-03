@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Curate.Data.Services.Interfaces;
 using Curate.Data.ViewModels.Search;
 using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Curate.Data.Services

@@ -12,7 +12,6 @@ namespace Curate.Data.Models
             TagPosts = new HashSet<TagPost>();
             TagRssFeedArticles = new HashSet<TagRssFeedArticle>();
             TagVideoChannels = new HashSet<TagVideoChannel>();
-            TagVideos = new HashSet<TagVideo>();
         }
 
         public int Id { get; set; }
@@ -27,6 +26,5 @@ namespace Curate.Data.Models
         public virtual ICollection<TagPost> TagPosts { get; set; }
         public virtual ICollection<TagRssFeedArticle> TagRssFeedArticles { get; set; }
         public virtual ICollection<TagVideoChannel> TagVideoChannels { get; set; }
-        public virtual ICollection<TagVideo> TagVideos { get; set; }
     }
 }

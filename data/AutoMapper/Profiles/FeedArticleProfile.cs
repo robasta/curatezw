@@ -18,6 +18,7 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest=> dest.LastModifiedDate, opt => opt.MapFrom(src=>src.LastModifiedDate))
                 .ForMember(dest=> dest.Tags, opt => opt.MapFrom(src=>src.TagRssFeedArticles))
                 .ForMember(dest=> dest.FeedId, opt => opt.MapFrom(src=>src.RssFeedId))
+                .ForMember(dest=> dest.Video, opt => opt.MapFrom(src=>src.Video))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<FeedArticleResolver>())
                 .ForAllOtherMembers(opts => opts.Ignore());
         }

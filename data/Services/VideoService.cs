@@ -36,6 +36,7 @@ namespace Curate.Data.Services
 
         public void CreateChannel(VideoChannel channel)
         {
+            
             _videoChannelRepository.Add(channel);
             _unitOfWork.CommitAsync();
         }

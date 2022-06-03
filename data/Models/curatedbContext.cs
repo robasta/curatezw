@@ -1,8 +1,6 @@
-﻿using System;
-using Curate.Data.ViewModels.Identity;
+﻿using Curate.Data.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -28,7 +26,6 @@ namespace Curate.Data.Models
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagPost> TagPosts { get; set; }
         public virtual DbSet<TagRssFeedArticle> TagRssFeedArticles { get; set; }
-        public virtual DbSet<TagVideo> TagVideos { get; set; }
         public virtual DbSet<TagVideoChannel> TagVideoChannels { get; set; }
         public virtual DbSet<UserAuditEvent> UserAuditEvents { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
@@ -102,6 +99,11 @@ namespace Curate.Data.Models
                     .WithMany(p => p.RssFeedArticles)
                     .HasForeignKey(d => d.RssFeedId)
                     .HasConstraintName("FK_RssFeedArticle_RssFeed");
+
+                entity.HasOne(d => d.Video)
+                    .WithMany(p => p.RssFeedArticles)
+                    .HasForeignKey(d => d.VideoId)
+                    .HasConstraintName("FK_RssFeedArticle_Video");
             });
 
             modelBuilder.Entity<RssFeedError>(entity =>
@@ -203,29 +205,6 @@ namespace Curate.Data.Models
                     .HasForeignKey(d => d.TagId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TagRssFeedArticle_Tag");
-            });
-
-            modelBuilder.Entity<TagVideo>(entity =>
-            {
-                entity.HasKey(e => new { e.TagId, e.VideoId });
-
-                entity.ToTable("TagVideo");
-
-                entity.Property(e => e.TagId).HasColumnName("Tag_Id");
-
-                entity.Property(e => e.VideoId).HasColumnName("Video_Id");
-
-                entity.HasOne(d => d.Tag)
-                    .WithMany(p => p.TagVideos)
-                    .HasForeignKey(d => d.TagId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TagVideo_Tag");
-
-                entity.HasOne(d => d.Video)
-                    .WithMany(p => p.TagVideos)
-                    .HasForeignKey(d => d.VideoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TagVideo_Video");
             });
 
             modelBuilder.Entity<TagVideoChannel>(entity =>

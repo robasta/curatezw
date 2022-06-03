@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Curate.Data.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Curate.Web.ViewModels;
-using Curate.Web.Identity;
 using Curate.Data.ViewModels.Identity;
 
 namespace Curate.Web

@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Curate.Data.ViewModels.Identity;
 using Curate.Web.Services;
-using Curate.Web.ViewModels;
 using Curate.Web.ViewModels.ManageViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
