@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Curate.Data.Models;
 using Curate.Data.Repositories.Interfaces;
@@ -23,6 +24,12 @@ namespace Curate.Data.Services
         public async Task<IEnumerable<Tag>> GetFeaturedTags()
         {
             return _tagRepository.All();
+        }
+
+
+        IQueryable<Tag> ITagService.Search(string q)
+        {
+           return _tagRepository.List(s=> s.Title.Contains(q));
         }
     }
 }

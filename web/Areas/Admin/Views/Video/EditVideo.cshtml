@@ -1,6 +1,14 @@
 ﻿@model Curate.Data.ViewModels.RssFeed.FeedArticleViewModel
 @{
-    ViewBag.Title = "Edit Feed Article";
+    ViewBag.Title = "Edit Video";
+}
+@section Styles
+{
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css" rel="stylesheet" />
+<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+<link href="~/site.css" rel="stylesheet" />
 }
 <!-- Main content -->
 <section class="content">
@@ -13,7 +21,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form asp-action="EditFeedArticle">
+                <form asp-action="EditVideo">
                     <div class="card-body">
                         <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
@@ -31,10 +39,10 @@
                             <span asp-validation-for="ImageUrl" class="text-danger"></span>
                         </div>
                         @*<div class="form-group">
-                            <label asp-for="Blurb" class="control-label"></label>
-                            <input asp-for="Blurb" class="form-control" />
-                            <span asp-validation-for="Blurb" class="text-danger"></span>
-                        </div>*@
+                                <label asp-for="Blurb" class="control-label"></label>
+                                <input asp-for="Blurb" class="form-control" />
+                                <span asp-validation-for="Blurb" class="text-danger"></span>
+                            </div>*@
                         <div class="form-group">
                             <label asp-for="PublishDate" class="control-label"></label>
                             <input asp-for="PublishDate" class="form-control" />
@@ -42,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Tags</label>
-                            <input type="text" class="form-control" />
+                            <input id="VideoTags" type="text" class="form-control" />
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -55,3 +63,38 @@
         </div>
     </div>
 </section>
+
+@section scripts{
+<script src="~/lib/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="~/lib/select2/js/select2.min.js"></script>
+<script>
+    var tags = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: document.location.origin + "/tag/search?q=%q",
+            wildcard: '%q'
+        }
+    });
+    tags.initialize();
+    $('input#VideoTags').tagsinput({
+        freeInput: true,
+        tagClass: "badge bg-primary",
+        allowDuplicates: false,
+        itemValue: 'id', 
+        itemText: 'name', 
+        typeaheadjs: [
+            {
+                minLength: 3,
+                highlight: true
+            }, {
+                minlength: 3,
+                display: 'name',
+                name: 'video_tags',
+                source: tags.ttAdapter()
+            }
+        ]
+    });
+</script>
+}

@@ -33,18 +33,7 @@ namespace Curate.Web.Areas.Admin.Controllers
              * */
             return View();
         }
-        public async Task<IActionResult> EditFeedArticle(int id)
-        {
-            var feedArticle = _feedAdminService.GetFeedArticle(id);
-            /*
-             * 1. Fetch details via Youtube API
-             * 2. Open this view, with FeedArticle prepopulated
-             * 3. Have a preview pane/dialog
-             * 4. Add Categorie and Tags
-             * 5. Preview Item & Schedule to homepage ***
-             * */
-            return View(feedArticle);
-        }
+       
 
         [Produces("application/json")]
         public  IActionResult GetOneFeed(int feedId)

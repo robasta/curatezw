@@ -13,9 +13,7 @@
       "provider": "jsdelivr",
       "library": "bootstrap@4.4.1",
       "destination": "wwwroot/lib/bootstrap",
-      "files": [
-        "dist/js/bootstrap.bundle.min.js"
-      ]
+
     },
     {
       "provider": "jsdelivr",
@@ -86,6 +84,20 @@
     {
       "library": "datatables.net-responsive-bs4@2.2.9",
       "destination": "wwwroot/lib/datatables.net-responsive-bs4/"
+    },
+    {
+      "library": "typeahead.js@0.11.1",
+      "destination": "wwwroot/lib/typeahead.js/"
     }
-  ]
+  ,
+{
+  "library": "bootstrap-tagsinput@0.8.0",
+  "destination": "wwwroot/lib/bootstrap-tagsinput/"
+}
+,
+{
+  "library": "select2@4.0.13",
+  "destination": "wwwroot/lib/select2/"
+}
+]
 }
