@@ -12,8 +12,10 @@ using Curate.Data.Repositories.Interfaces;
 using Curate.Data.Services.Interfaces;
 using Curate.Data.Utils;
 using Curate.Data.ViewModels;
+using Curate.Data.ViewModels.Category;
 using Curate.Data.ViewModels.RssFeed;
 using Microsoft.Extensions.Logging;
+using ArticleViewModel = Curate.Data.ViewModels.Article.ArticleViewModel;
 
 namespace Curate.Data.Services
 {
@@ -136,19 +138,19 @@ namespace Curate.Data.Services
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public List<FeedCategoryViewModel> GetAllCategorizedFeeds()
+        public List<CategoryViewModel> GetAllCategorizedFeeds()
         {
             var categories =
                 _feedCategoryRepository.All("SubCategories,SubCategories.RssFeeds,SubCategories.RssFeeds.Articles");
-            var viewModel = _mapper.Map<List<FeedCategoryViewModel>>(categories);
+            var viewModel = _mapper.Map<List<CategoryViewModel>>(categories);
 
             return viewModel;
         }
 
-        public FeedArticleViewModel GetFeedArticle(int id)
+        public ArticleViewModel GetArticle(int id)
         {
             var article = _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagArticles.Tag");
-            var viewModel = _mapper.Map<FeedArticleViewModel>(article);
+            var viewModel = _mapper.Map<ArticleViewModel>(article);
             return viewModel;
         }
 

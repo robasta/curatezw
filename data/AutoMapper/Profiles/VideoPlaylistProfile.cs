@@ -16,6 +16,7 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest=> dest.PublishDate, opt => opt.MapFrom(src=>src.Snippet.PublishedAt))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Snippet.Thumbnails.Default__.Url))
                 .ForMember(dest => dest.Slug, opt => opt.MapFrom<VideoPlaylistResolver>())
+                .ReverseMap()
                 .ForAllOtherMembers(opts => opts.Ignore());
         }
     }

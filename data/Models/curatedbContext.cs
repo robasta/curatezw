@@ -1,8 +1,6 @@
-﻿using System;
-using Curate.Data.ViewModels.Identity;
+﻿using Curate.Data.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 

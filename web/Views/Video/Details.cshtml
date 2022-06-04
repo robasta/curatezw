@@ -1,5 +1,5 @@
 ﻿
-@model Curate.Data.Models.Video
+@model Curate.Data.ViewModels.Article.ArticleViewModel
 <div class="pb-2 mb-2 mb-md-4">
     <div class="container">
         <div class="row">
@@ -24,7 +24,7 @@
                     <div class="my-3 text-muted small">
                         <!--author-->
                         <span class="d-none d-sm-inline">
-                            by <a class="fw-bold" href="../category/author.html">@Model.Article.Title</a>
+                            by <a class="fw-bold" href="../category/author.html">@Model.Title</a>
                         </span>
                         <!--date-->
                         <time class="ms-0 ms-sm-2 ms-md-3" datetime="2019-10-22">
@@ -85,8 +85,8 @@
             </div>
             <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
                 <div class="wp-block-embed__wrapper">
-                    <iframe title="@Model.Article.Title" width="750" height="422" src="@Model.EmbedUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-                </div><figcaption> @Model.Article.Blurb </figcaption>
+                    <iframe title="@Model.Title" width="750" height="422" src="@Model.Video.EmbedUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                </div><figcaption> @Model.Blurb </figcaption>
             </figure>
         </div>
         <partial name="Asides/_VideoAside" />

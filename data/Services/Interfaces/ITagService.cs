@@ -8,7 +8,9 @@ namespace Curate.Data.Services.Interfaces
     public interface ITagService
     {
         Task<Tag> GetTag(int id, string includeProperties);
-        Task<IEnumerable<Tag>> GetFeaturedTags();
+        IQueryable<Tag> GetTags();
         IQueryable<Tag>  Search(string q);
+        Tag SaveTag(Tag tag);
+        
     }
 }

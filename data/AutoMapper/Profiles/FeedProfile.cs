@@ -22,6 +22,7 @@ namespace Curate.Data.AutoMapper.Profiles
                 .ForMember(dest => dest.BlockedReason, opt=> opt.MapFrom(src=> src.BlockedReason))
                 .ForMember(dest => dest.Articles, opt=> opt.MapFrom(src=> src.Articles))
                 .ForMember(dest=>dest.Slug, opt=> opt.MapFrom<FeedResolver>())
+                .ReverseMap()
                 .ForAllOtherMembers(opts => opts.Ignore());
         }
     }

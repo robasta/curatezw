@@ -10,10 +10,12 @@ namespace Curate.Data.Services
     public class TagService: ITagService
     {
         private readonly ITagRepository _tagRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TagService(ITagRepository tagRepository)
+        public TagService(ITagRepository tagRepository, IUnitOfWork unitOfWork)
         {
             _tagRepository = tagRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Tag> GetTag(int id, string includeProperties)
@@ -29,7 +31,19 @@ namespace Curate.Data.Services
 
         IQueryable<Tag> ITagService.Search(string q)
         {
-           return _tagRepository.List(s=> s.Title.Contains(q));
+           return _tagRepository.List(s=> s.Title.ToLower().Contains(q));
+        }
+
+        public Tag SaveTag(Tag tag)
+        {
+            _tagRepository.Add(tag);
+            _unitOfWork.CommitAsync();
+            return tag;
+        }
+
+        public IQueryable<Tag> GetTags()
+        {
+            return _tagRepository.All();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<Curate.Data.ViewModels.RssFeed.FeedCategoryViewModel>
+﻿@model List<Curate.Data.ViewModels.Category.CategoryViewModel>
 @{
     ViewData["Title"] = "RSS Feeds";
 }
@@ -219,23 +219,15 @@
                                         }
                                     },
                                    
-                                    { data: 'lastFeaturedDate' },
                                     { data: 'url' },
-                                    {
-                                        data: null,
-                                        render: function(data, type, row) {
-                                            if (row.hasBeenFeatured)
-                                                return "<span class='badge badge-danger'>" + row.formattedLastFeaturedDate + "</span>";
-                                            return "";
-                                        }
-                                    },
+                                   
                                     {
                                         data: null,
                                         className: "dt-center editor-edit",
                                         orderable: false,
                                         render: function (data, type, row) {
                                             
-                                           return "<a href='/Admin/Video/EditVideo?id=" + row.id + "&fetch_data=true' target='blank' class='btn btn-success btn-xs'>Add to Featured</a>"
+                                           return "<a href='/Admin/Video/EditVideo?id=" + row.id + "&fetch_data=true' target='blank' class='btn btn-success btn-xs'>Edit</a>"
                                         }
                                     }
                                 ],

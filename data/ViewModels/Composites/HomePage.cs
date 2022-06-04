@@ -8,7 +8,7 @@ namespace Curate.Data.ViewModels.Composites
     public class HomePage
     {
 
-        public List<Video> FeaturedVideos { get; set; }
+        public List<Models.Video> FeaturedVideos { get; set; }
 
         public List<Post> FeaturedNyambo { get; set; }
 

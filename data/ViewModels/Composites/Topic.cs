@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Curate.Data.Models;
 using Curate.Data.ViewModels.News;
 
 namespace Curate.Data.ViewModels.Composites
@@ -16,7 +15,7 @@ namespace Curate.Data.ViewModels.Composites
         public List<ArticleEntity> Entities { get; set; }
         public List<string> Tags { get; set; }
         public string ImageUrl { get; set; }
-        public List<Video> Videos { get; set; }
+        public List<Models.Video> Videos { get; set; }
         public List<string> References { get; set; }
         public string PindulaWikiUrl { get; set; }
         public string WikipediaUrl { get; set; }

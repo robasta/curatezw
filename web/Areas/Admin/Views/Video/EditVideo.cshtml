@@ -1,15 +1,31 @@
-﻿@model Curate.Data.ViewModels.RssFeed.FeedArticleViewModel
+﻿@model Curate.Data.ViewModels.Article.ArticleViewModel
 @{
     ViewBag.Title = "Edit Video";
 }
 @section Styles
 {
-<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
-<link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css" rel="stylesheet" />
-<link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-<link href="~/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css" rel="stylesheet" />
+    <link href="~/site.css" rel="stylesheet" />
 }
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Video</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Edit Video</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 <!-- Main content -->
 <section class="content">
     <div class="row">
@@ -17,7 +33,7 @@
         <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Edit Feed Article</h3>
+                    <h3 class="card-title">@Model.Title</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -38,63 +54,79 @@
                             <input asp-for="ImageUrl" class="form-control" />
                             <span asp-validation-for="ImageUrl" class="text-danger"></span>
                         </div>
-                        @*<div class="form-group">
-                                <label asp-for="Blurb" class="control-label"></label>
-                                <input asp-for="Blurb" class="form-control" />
-                                <span asp-validation-for="Blurb" class="text-danger"></span>
-                            </div>*@
+                        <div class="form-group">
+                            <label asp-for="Blurb" class="control-label"></label>
+                            <input asp-for="Blurb" class="form-control" />
+                            <span asp-validation-for="Blurb" class="text-danger"></span>
+                        </div>
                         <div class="form-group">
                             <label asp-for="PublishDate" class="control-label"></label>
                             <input asp-for="PublishDate" class="form-control" />
                             <span asp-validation-for="PublishDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Tags</label>
-                            <input id="VideoTags" type="text" class="form-control" />
+                            <label asp-for="TagList" class="control-label"></label>
+                            <input asp-for="TagList" class="form-control" />
                         </div>
                     </div>
                     <!-- /.card-body -->
-
+                    @Html.HiddenFor(Model=>Model.Id)
+                    @Html.HiddenFor(Model=>Model.FeedId)
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <input type="submit" value="Submit" class="btn btn-default" id="btnSubmitPost" />
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Preview</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+                        <div class="wp-block-embed__wrapper">
+                            <iframe title="@Model.Title" width="750" height="422" src="@Model.Video.EmbedUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                        </div><figcaption> @Model.Blurb </figcaption>
+                    </figure>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 @section scripts{
-<script src="~/lib/typeahead.js/typeahead.bundle.min.js"></script>
-<script src="~/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-<script src="~/lib/select2/js/select2.min.js"></script>
-<script>
-    var tags = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: document.location.origin + "/tag/search?q=%q",
-            wildcard: '%q'
-        }
-    });
-    tags.initialize();
-    $('input#VideoTags').tagsinput({
-        freeInput: true,
-        tagClass: "badge bg-primary",
-        allowDuplicates: false,
-        itemValue: 'id', 
-        itemText: 'name', 
-        typeaheadjs: [
-            {
-                minLength: 3,
-                highlight: true
-            }, {
-                minlength: 3,
-                display: 'name',
-                name: 'video_tags',
-                source: tags.ttAdapter()
+    <script src="~/lib/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="~/js/bootstrap-tagsinput.js"></script>
+    <script>
+        var tags = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: document.location.origin + "/tag/search?q=%q&titlesOnly=true",
+                wildcard: '%q'
             }
-        ]
-    });
-</script>
+        });
+        tags.initialize();
+        $('input#TagList').tagsinput({
+            freeInput: true,
+            /*addOnBlur: true,*/
+            tagClass: "badge bg-primary",
+            /*allowDuplicates: false,
+            itemValue: 'id',
+            itemText: 'name',
+            /*confirmKeys: [13, 188],*/
+            typeaheadjs: [
+                {
+                    minLength: 3,
+                    highlight: true
+                }, {
+                    minlength: 3,
+                    name: 'video_tags',
+                    source: tags.ttAdapter()
+                }
+            ]
+        });
+    </script>
 }

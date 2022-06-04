@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Profile\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>

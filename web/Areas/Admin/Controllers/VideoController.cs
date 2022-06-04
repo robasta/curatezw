@@ -1,7 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Curate.Data.Models;
 using Curate.Data.Repositories.Interfaces;
 using Curate.Data.Services.Interfaces;
+using Curate.Data.Utils;
+using Curate.Data.ViewModels.Article;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,30 +17,27 @@ namespace Curate.Web.Areas.Admin.Controllers
     public class VideoController : Controller
     {
         private readonly IVideoService _videoService;
-        private readonly IRssFeedAdminService _feedAdminService;
-        public VideoController(IVideoService videoService, IRssFeedAdminService feedAdminService)
+        private readonly ITagService _tagService;
+        public VideoController(IVideoService videoService, ITagService tagService)
         {
             _videoService = videoService;
-            _feedAdminService = feedAdminService;
+            _tagService = tagService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditVideo(int id)
+        public IActionResult EditVideo(int id)
         {
-            var article = _feedAdminService.GetFeedArticle(id);
-            
-            /*
-             * 4. Add Categorie and Tags
-             * 5. Preview Item & Add to Collection***
-             * */
-            return View(article);
+            var articleViewModel = _videoService.GetVideo(id);
+            articleViewModel.SetTagList();
+            return View(articleViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditVideo(Article article)
+        public IActionResult EditVideo(ArticleViewModel articleViewModel)
         {
-          
-            return View(article);
+            _videoService.SaveVideo(articleViewModel);
+            articleViewModel = _videoService.GetVideo(articleViewModel.Id);
+            return View(articleViewModel);
         }
 
     }

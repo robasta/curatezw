@@ -14,12 +14,8 @@ namespace Curate.Web.Controllers
 
         public IActionResult Index()
         {
-            var videos = _videoService.GetFeaturedVideos();
-            if (videos == null)
-            {
-                return StatusCode(404);
-            }
-            return View(videos);
+            
+            return View();
         }
 
         public IActionResult Details(int id, string slug)
@@ -35,13 +31,7 @@ namespace Curate.Web.Controllers
 
         public IActionResult Playlist(int id, string slug)
         {
-            var playlist = _videoService.GetPlaylist(id);
-            if (playlist == null)
-            {
-                return StatusCode(404);
-            }
-            ViewBag.Title = playlist.Title;
-            return View(playlist);
+            return View();
         }
 
         [HttpGet]

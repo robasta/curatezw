@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Curate.Data.ViewModels.Article;
+using Curate.Data.ViewModels.Category;
 
 namespace Curate.Data.ViewModels.RssFeed
 {
@@ -16,8 +18,8 @@ namespace Curate.Data.ViewModels.RssFeed
         public bool Blocked { get; set; }
         public string BlockedReason { get; set; }
         public DateTime? LastUpdated { get; set; }
-        public FeedCategoryViewModel Category { get; set; }
-        public FeedSubCategoryViewModel SubCategory { get; set; }
-        public List<FeedArticleViewModel> Articles { get; set; }
+        public CategoryViewModel Category { get; set; }
+        public SubCategoryViewModel SubCategory { get; set; }
+        public List<ArticleViewModel> Articles { get; set; }
     }
 }

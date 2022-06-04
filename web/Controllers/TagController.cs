@@ -18,11 +18,14 @@ namespace Curate.Web.Controllers
         }
 
         [Produces("application/json")]
-        public IActionResult Search(string q)
+        public IActionResult Search(string q, bool titlesOnly=false)
         {
-            var tags = _tagService.Search(q);
-            var jsonTags = tags.Select(tag => new JsonTag { Id = tag.Id, Name = tag.Title }).ToList();
-            return Ok(jsonTags);
+            var tags = _tagService.Search(q.ToLower());
+            if (titlesOnly)
+            {
+                return Ok(tags.Select(tag => tag.Title).ToList());
+            }
+            return Ok(tags.Select(tag => new JsonTag { Id = tag.Id, Name = tag.Title }).ToList());
         }
     }
 }

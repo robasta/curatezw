@@ -16,7 +16,8 @@ namespace Curate.Data.ViewModels
             Id = tag.Id;
             Title = tag.Title;
             Description = tag.Description;
-            RelativeUrl = string.Format(SiteConstants.RouteTemplates.TagDetail, tag.Id, tag.Slug);
+            Slug = tag.Slug;
+            RelativeUrl = string.Format(SiteConstants.RouteTemplates.TagDetail, tag.Id, Slug);
             AbsoluteUrl = SiteConstants.NyamboBaseUrl + RelativeUrl;
             NyamboList = new List<NyamboViewModel>();
             if (tag.TagPosts!= null)
@@ -33,6 +34,7 @@ namespace Curate.Data.ViewModels
         public string Description { get; set; }
         public string RelativeUrl { get; set; }
         public string AbsoluteUrl { get; set; }
+        public string Slug { get; set; }
         public List<NyamboViewModel> NyamboList { get; set; }
         public string HtmlEncodedUrl => WebUtility.HtmlEncode(AbsoluteUrl);
 
