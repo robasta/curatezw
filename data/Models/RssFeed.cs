@@ -12,7 +12,6 @@ namespace Curate.Data.Models
             Articles = new HashSet<Article>();
         }
 
-        public int? SubCategoryId { get; set; }
         public int Id { get; set; }
         public string Url { get; set; }
         public string Title { get; set; }
@@ -24,6 +23,8 @@ namespace Curate.Data.Models
         public string XmlUrl { get; set; }
         public bool Blocked { get; set; }
         public string BlockedReason { get; set; }
+        public int SubCategoryId { get; set; }
+
         public virtual SubCategory SubCategory { get; set; }
         public virtual VideoChannel VideoChannel { get; set; }
         public virtual ICollection<Article> Articles { get; set; }

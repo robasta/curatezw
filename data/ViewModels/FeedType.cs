@@ -2,9 +2,9 @@
 {
     public enum SourceType
     {
-        Blog,
-        Podcast,
-        Video,
-        Website
+        Blog=1,
+        Podcast=2,
+        Video=3,
+        Website=4
     }
 }

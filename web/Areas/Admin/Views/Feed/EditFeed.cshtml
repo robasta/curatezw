@@ -1,6 +1,6 @@
-﻿@model Curate.Data.Models.VideoChannel
+﻿@model Curate.Data.Models.RssFeed
 @{
-    ViewBag.Title = "Create Video Channel";
+    ViewBag.Title = "Create Feed";
 }
 <!-- Main content -->
 <section class="content">
@@ -9,13 +9,13 @@
         <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create Channel</h3>
+                    <h3 class="card-title">Create Feed</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form asp-action="CreateChannel">
+                <form asp-action="EditFeed">
                     <div class="card-body">
-                        @*<div class="form-group">
+                        <div class="form-group">
                             <label asp-for="Title" class="control-label"></label>
                             <input asp-for="Title" class="form-control" />
                             <span asp-validation-for="Title" class="text-danger"></span>
@@ -34,11 +34,6 @@
                             <label asp-for="Blurb" class="control-label"></label>
                             <input asp-for="Blurb" class="form-control" />
                             <span asp-validation-for="Blurb" class="text-danger"></span>
-                        </div>*@
-                        <div class="form-group">
-                            <label asp-for="ChannelCreationDate" class="control-label"></label>
-                            <input asp-for="ChannelCreationDate" class="form-control" />
-                            <span asp-validation-for="ChannelCreationDate" class="text-danger"></span>
                         </div>
                     </div>
                     <!-- /.card-body -->

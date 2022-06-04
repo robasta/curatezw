@@ -46,22 +46,22 @@
                             <tbody>
                                 @foreach (var channel in Model)
                                 {
-                                    @*<tr>
-                                        <td>@channel.Title</td>
-                                        <td>@channel.Blurb</td>
-                                        <td>@channel.LastModifiedDate</td>
-                                        <td>@channel.Url</td>
-                                        <td>@channel.ImageUrl</td>
-                                    </tr>*@
+                                    <tr>
+                                        <td>@channel.RssFeed.Title</td>
+                                        <td>@channel.RssFeed.Blurb</td>
+                                        <td>@channel.RssFeed.LastUpdated</td>
+                                        <td>@channel.RssFeed.Url</td>
+                                        <td>@channel.RssFeed.ImageUrl</td>
+                                    </tr>
                                 }
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>Title</th>
+                                    <th>Blurb</th>
+                                    <th>Last Modified</th>
+                                    <th>Url</th>
+                                    <th>ImageUrl</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -83,7 +83,6 @@
     $(function () {
       $("#tblChannels").DataTable({
         "responsive": true, "lengthChange": true, "autoWidth": true,
-        //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#tblChannels_wrapper .col-md-6:eq(0)');
     });
 </script>

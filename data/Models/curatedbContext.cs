@@ -20,11 +20,9 @@ namespace Curate.Data.Models
         }
 
         public virtual DbSet<Article> Articles { get; set; }
-      
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
         public virtual DbSet<CollectionArticle> CollectionArticles { get; set; }
-        public virtual DbSet<CollectionItem> CollectionItems { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<RssFeed> RssFeeds { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
@@ -55,9 +53,7 @@ namespace Curate.Data.Models
             {
                 entity.ToTable("Article");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.Blurb).HasMaxLength(250);
+                entity.Property(e => e.Blurb);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
@@ -71,19 +67,11 @@ namespace Curate.Data.Models
 
                 entity.Property(e => e.Url).IsRequired();
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Article)
-                    .HasForeignKey<Article>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Article_Video");
-
                 entity.HasOne(d => d.RssFeed)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.RssFeedId)
                     .HasConstraintName("FK_Article_RssFeed");
             });
-
-          
 
             modelBuilder.Entity<Category>(entity =>
             {
@@ -132,18 +120,6 @@ namespace Curate.Data.Models
                     .HasConstraintName("FK_CollectionArticle_Collection");
             });
 
-            modelBuilder.Entity<CollectionItem>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("CollectionItem");
-
-                entity.Property(e => e.Test)
-                    .HasMaxLength(10)
-                    .HasColumnName("test")
-                    .IsFixedLength(true);
-            });
-
             modelBuilder.Entity<Post>(entity =>
             {
                 entity.ToTable("Post");
@@ -180,8 +156,6 @@ namespace Curate.Data.Models
                     .HasConstraintName("FK_RssFeed_SubCategory");
             });
 
-           
-
             modelBuilder.Entity<SubCategory>(entity =>
             {
                 entity.ToTable("SubCategory");
@@ -194,7 +168,7 @@ namespace Curate.Data.Models
                     .WithMany(p => p.SubCategories)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SubCategory_Category");
+                    .HasConstraintName("FK_RssFeedSubtype_RssFeedType");
             });
 
             modelBuilder.Entity<Tag>(entity =>
@@ -217,7 +191,7 @@ namespace Curate.Data.Models
             modelBuilder.Entity<TagArticle>(entity =>
             {
                 entity.HasKey(e => new { e.ArticleId, e.TagId })
-                    .HasName("PK_ArticleTag2");
+                    .HasName("PK_RssFeedArticleTag2");
 
                 entity.ToTable("TagArticle");
 
@@ -235,7 +209,7 @@ namespace Curate.Data.Models
                     .WithMany(p => p.TagArticles)
                     .HasForeignKey(d => d.TagId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TagArticle_Tag");
+                    .HasConstraintName("FK_TagRssFeedArticle_Tag");
             });
 
             modelBuilder.Entity<TagPost>(entity =>
@@ -290,18 +264,30 @@ namespace Curate.Data.Models
 
             modelBuilder.Entity<Video>(entity =>
             {
+                entity.HasKey(e => e.ArticleId);
+
                 entity.ToTable("Video");
+
+                entity.Property(e => e.ArticleId).ValueGeneratedNever();
 
                 entity.Property(e => e.VideoId)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.HasOne(d => d.Article)
+                    .WithOne(p => p.Video)
+                    .HasForeignKey<Video>(d => d.ArticleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Video_Article");
             });
 
             modelBuilder.Entity<VideoChannel>(entity =>
             {
+                entity.HasKey(e => e.RssFeedId);
+
                 entity.ToTable("VideoChannel");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.RssFeedId).ValueGeneratedNever();
 
                 entity.Property(e => e.ChannelCreationDate).HasColumnType("date");
 
@@ -313,9 +299,9 @@ namespace Curate.Data.Models
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.HasOne(d => d.IdNavigation)
+                entity.HasOne(d => d.RssFeed)
                     .WithOne(p => p.VideoChannel)
-                    .HasForeignKey<VideoChannel>(d => d.Id)
+                    .HasForeignKey<VideoChannel>(d => d.RssFeedId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VideoChannel_RssFeed1");
             });

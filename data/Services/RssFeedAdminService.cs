@@ -21,14 +21,18 @@ namespace Curate.Data.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRssFeedRepository _feedRepository;
+        private readonly IVideoRepository _videoRepository;
         private readonly IArticleRepository _feedArticleRepository;
         private readonly IRssFeedCategoryRepository _feedCategoryRepository;
         private readonly IYoutubeApiService _youTubeApiService;
+        private const string YoutubeBaseUrlEmbed = "https://www.youtube.com/embed/";
 
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository, IArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper, IRssFeedCategoryRepository feedCategoryRepository, IYoutubeApiService youTubeService)
+        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository,
+            IArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper,
+            IRssFeedCategoryRepository feedCategoryRepository, IYoutubeApiService youTubeService, IVideoRepository videoRepository)
 
         {
             _unitOfWork = unitOfWork;
@@ -38,6 +42,7 @@ namespace Curate.Data.Services
             _mapper = mapper;
             _feedCategoryRepository = feedCategoryRepository;
             _youTubeApiService = youTubeService;
+            _videoRepository = videoRepository;
         }
 
         private async Task ProcessRssFeed(RssFeed feed)
@@ -56,7 +61,7 @@ namespace Curate.Data.Services
                     feed.ImageUrl = data.ImageUrl;
                 if (!string.IsNullOrEmpty(data.Description))
                     feed.Blurb = data.Description;
-                if(!string.IsNullOrEmpty(data.Title))
+                if (!string.IsNullOrEmpty(data.Title))
                     feed.Title = data.Title;
                 feed.LastUpdated = DateTime.Now;
 
@@ -76,71 +81,83 @@ namespace Curate.Data.Services
                             LastModifiedDate = DateTime.Now,
                             Title = item.Title,
                             RssFeedId = feed.Id,
+                            Slug = Slugify.GenerateSlug(item.Title),
                         };
-
-                        if (feed.SubCategory.CategoryId == (int)SourceType.Video)
+                        _feedArticleRepository.Add(article);
+                        await _unitOfWork.CommitAsync();
+                        if (feed.SubCategory?.CategoryId == (int)SourceType.Video)
                         {
                             var videoId = YoutubeHelper.GetVideoIdFromUrl(article.Url);
                             if (!string.IsNullOrWhiteSpace(videoId))
                             {
-                                var video = await _youTubeApiService.GetVideoById(videoId);
-                                //article. = video;
+                                var video = new Video();
+                                var youtubeVideo = await _youTubeApiService.GetVideoById(videoId);
+                                video.VideoId = videoId;
+                                video.ArticleId = article.Id;
+                                video.EmbedUrl = $"{YoutubeBaseUrlEmbed}{videoId}";
+                                article.Blurb = youtubeVideo.Snippet.Description;
+                                article.ImageUrl = youtubeVideo.Snippet.Thumbnails.Default__.Url;
+                                article.PublishDate = youtubeVideo.Snippet.PublishedAt;
+                                _videoRepository.Add(video);
+                                await _unitOfWork.CommitAsync();
                             }
                         }
 
-                        _feedArticleRepository.Add(article);
+                        
+
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex,"Feed error");
+                _logger.LogError(ex, "Feed error");
             }
-            
-
         }
 
         public async Task<bool> ScanAllRssFeeds()
         {
-            var rssFeeds = _feedRepository.List(x=>x.Blocked == false).ToList();
+            var rssFeeds = _feedRepository.All("SubCategory.Category").ToList();
             foreach (var item in rssFeeds)
             {
-               await ProcessRssFeed(item);
+                await ProcessRssFeed(item);
             }
-           return await _unitOfWork.CommitAsync()>0;
+
+            return await _unitOfWork.CommitAsync() > 0;
 
         }
 
         public async Task<bool> ScanOneRssFeed(int feedId)
         {
-            var feed = _feedRepository.List(f => f.Id == feedId && !f.Blocked).FirstOrDefault();
+            var feed = _feedRepository.GetOneByFilter(f => f.Id == feedId && !f.Blocked, "SubCategory.Category");
             if (feed == null)
                 return false;
-         
+
             ProcessRssFeed(feed).Wait();
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public List<FeedCategoryViewModel> GetAllCategorizedFeeds()
         {
-            var categories = _feedCategoryRepository.All("SubCategorys,SubCategorys.RssFeeds,SubCategorys.RssFeeds.Articles");
+            var categories =
+                _feedCategoryRepository.All("SubCategories,SubCategories.RssFeeds,SubCategories.RssFeeds.Articles");
             var viewModel = _mapper.Map<List<FeedCategoryViewModel>>(categories);
-          
+
             return viewModel;
         }
 
         public FeedArticleViewModel GetFeedArticle(int id)
         {
-            var Article =
-                _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagArticles.Tag");
-            var viewModel = _mapper.Map<FeedArticleViewModel>(Article);
+            var article = _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagArticles.Tag");
+            var viewModel = _mapper.Map<FeedArticleViewModel>(article);
             return viewModel;
         }
 
         public FeedViewModel GetFeed(int feedId)
         {
-            var rssFeed =  _feedRepository.GetOneByFilter(i => i.Id == feedId && !i.Blocked, "Articles"); //,SubCategory,SubCategory.ParentType
-            var viewModel =  _mapper.Map<FeedViewModel>(rssFeed);
+            var rssFeed =
+                _feedRepository.GetOneByFilter(i => i.Id == feedId && !i.Blocked,
+                    "Articles, Articles.Video"); //,SubCategory,SubCategory.ParentType
+            var viewModel = _mapper.Map<FeedViewModel>(rssFeed);
             return viewModel;
         }
 
@@ -162,7 +179,9 @@ namespace Curate.Data.Services
                                 HtmlUrl = feed.HtmlUrl?.Trim(),
                                 Title = feed.Title?.Trim(),
                                 XmlUrl = feed.XmlUrl?.Trim(),
-                                Url = string.IsNullOrWhiteSpace(feed.HtmlUrl) ? feed.XmlUrl?.Trim() : feed.HtmlUrl?.Trim(),
+                                Url = string.IsNullOrWhiteSpace(feed.HtmlUrl)
+                                    ? feed.XmlUrl?.Trim()
+                                    : feed.HtmlUrl?.Trim(),
                                 SubCategoryId = outline.SubTypeId,
                             };
                             _feedRepository.Add(rssFeed);

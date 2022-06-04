@@ -8,7 +8,6 @@ using Curate.Data.Services.Interfaces;
 using Curate.Data.Utils;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using Video = Curate.Data.Models.Video;
 
 namespace Curate.Data.Services
 {
@@ -27,21 +26,21 @@ namespace Curate.Data.Services
             _videoPlaylistRepository = videoPlaylistRepository;
             _unitOfWork = unitOfWork;
             _videoChannelRepository = videoChannelRepository;
+            var environmentVariable = Environment.GetEnvironmentVariable("YoutubeApiKey");
             _youTubeService = new YouTubeService(new BaseClientService.Initializer
             {
-                ApiKey = "",
+                ApiKey = environmentVariable,
                 ApplicationName = this.GetType().ToString()
             });
         }
-        public async Task<Video> GetVideoById(string videoId)
+        public async Task<Google.Apis.YouTube.v3.Data.Video> GetVideoById(string videoId)
         {
             var videoRequest = _youTubeService.Videos.List("snippet,contentDetails");
             videoRequest.Id = videoId;
             var videoResponse = await videoRequest.ExecuteAsync();
             var youtubeVideo = videoResponse.Items.First();
-            var curateVideo = _mapper.Map<Video>(youtubeVideo);
 
-            return curateVideo;
+            return youtubeVideo;
         }
 
         public async Task<VideoPlaylist> GetPlaylistById(string playListId)
@@ -105,7 +104,9 @@ namespace Curate.Data.Services
                 var videoId = YoutubeHelper.GetVideoIdFromUrl(url);
                 if (!string.IsNullOrWhiteSpace(videoId))
                 {
-                    var video = await GetVideoById(videoId);
+                    var youtubeVideo = await GetVideoById(videoId);
+                    var video = new Video();
+
                     _videoRepository.Add(video);
                 }
             }

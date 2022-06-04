@@ -8,6 +8,7 @@ using Curate.Data.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Curate.Data.ViewModels.Identity;
+using Newtonsoft.Json;
 
 namespace Curate.Web
 {
@@ -46,7 +47,10 @@ namespace Curate.Web
             services.AddRepositories();
             services.AddServices();
             services.AddControllers().AddRazorRuntimeCompilation();
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson(
+                options => {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                }); ;
            // services.AddRazorPages();
            
           

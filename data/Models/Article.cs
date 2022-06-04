@@ -24,8 +24,8 @@ namespace Curate.Data.Models
         public int? RssFeedId { get; set; }
         public string Slug { get; set; }
 
-        public virtual Video IdNavigation { get; set; }
         public virtual RssFeed RssFeed { get; set; }
+        public virtual Video Video { get; set; }
         public virtual ICollection<CollectionArticle> CollectionArticles { get; set; }
         public virtual ICollection<TagArticle> TagArticles { get; set; }
     }

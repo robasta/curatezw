@@ -12,7 +12,7 @@ namespace Curate.Data.Models
             VideoPlaylistVideos = new HashSet<VideoPlaylistVideo>();
         }
 
-        public int Id { get; set; }
+        public int ArticleId { get; set; }
         public string EmbedUrl { get; set; }
         public string VideoId { get; set; }
 

@@ -21,12 +21,12 @@ namespace Curate.Data.Services
         }
         public Video GetVideo(int id)
         {
-            return  _videoRepository.List(v=>v.Id== id).FirstOrDefault();
+            return  _videoRepository.GetOneByFilter(v=>v.ArticleId== id);
         }
 
         public VideoPlaylist GetPlaylist(int id)
         {
-            return _videoPlaylistRepository.List(v => v.Id == id).FirstOrDefault();
+            return _videoPlaylistRepository.GetOneByFilter(v => v.Id == id);
         }
 
         public IEnumerable<Video> GetFeaturedVideos()
