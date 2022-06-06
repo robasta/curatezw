@@ -8,10 +8,10 @@ namespace Curate.Data.Services
 {
     public class CollectionService : ICollectionService
     {
-        private readonly IRepository<Collection> _collectionRepository;
+        private readonly ICollectionRepository _collectionRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CollectionService(IRepository<Collection> collectionRepository, IUnitOfWork unitOfWork)
+        public CollectionService(ICollectionRepository collectionRepository, IUnitOfWork unitOfWork)
         {
             _collectionRepository = collectionRepository;
             _unitOfWork = unitOfWork;

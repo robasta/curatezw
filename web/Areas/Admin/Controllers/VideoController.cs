@@ -25,7 +25,7 @@ namespace Curate.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditVideo(int id)
+        public IActionResult Edit(int id)
         {
             var articleViewModel = _videoService.GetVideo(id);
             articleViewModel.SetTagList();
@@ -33,11 +33,11 @@ namespace Curate.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditVideo(ArticleViewModel articleViewModel)
+        public IActionResult Edit(ArticleViewModel articleViewModel)
         {
             _videoService.SaveVideo(articleViewModel);
             articleViewModel = _videoService.GetVideo(articleViewModel.Id);
-            return View(articleViewModel);
+            return RedirectToAction("Edit", new {id=articleViewModel.Id});
         }
 
     }

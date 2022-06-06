@@ -42,7 +42,8 @@ namespace Curate.Web.Extensions
                 .AddScoped<IVideoRepository, VideoRepository>()
                 .AddScoped<IVideoChannelRepository, VideoChannelRepository>()
                 .AddScoped<ITagRepository, TagRepository>()
-                .AddScoped<IVideoPlaylistRepository,VideoPlaylistRepository>();
+                .AddScoped<IVideoPlaylistRepository,VideoPlaylistRepository>()
+                .AddScoped<ICollectionRepository,CollectionRepository>();
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
