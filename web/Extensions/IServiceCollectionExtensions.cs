@@ -46,6 +46,7 @@ namespace Curate.Web.Extensions
             .AddScoped<IVideoService, VideoService>()
             .AddScoped<IYoutubeApiService, YoutubeApiService>()
             .AddScoped<IRssFeedAdminService, RssFeedAdminService>()
+            .AddScoped<ICollectionService, CollectionService>()
             .AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>()
             .AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>()
             .AddTransient<IEmailSender, AuthMessageSender>()
