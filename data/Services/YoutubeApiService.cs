@@ -14,12 +14,12 @@ namespace Curate.Data.Services
     public class YoutubeApiService: IYoutubeApiService
     {
         private readonly YouTubeService _youTubeService;
-        private readonly IRepository<Video> _videoRepository;
-        private readonly IRepository<VideoChannel> _videoChannelRepository;
-        private readonly IRepository<VideoPlaylist> _videoPlaylistRepository;
+        private readonly IVideoRepository _videoRepository;
+        private readonly IVideoChannelRepository _videoChannelRepository;
+        private readonly IVideoPlaylistRepository _videoPlaylistRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public YoutubeApiService(IRepository<Video> videoRepository, IMapper mapper, IRepository<VideoPlaylist> videoPlaylistRepository, IUnitOfWork unitOfWork, IRepository<VideoChannel> videoChannelRepository)
+        public YoutubeApiService(IVideoRepository videoRepository, IMapper mapper, IVideoPlaylistRepository videoPlaylistRepository, IUnitOfWork unitOfWork, IVideoChannelRepository videoChannelRepository)
         {
             _videoRepository = videoRepository;
             _mapper = mapper;

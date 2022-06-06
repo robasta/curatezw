@@ -22,19 +22,19 @@ namespace Curate.Data.Services
     public class RssFeedAdminService : IRssFeedAdminService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<RssFeed> _feedRepository;
-        private readonly IRepository<Video> _videoRepository;
-        private readonly IRepository<Article> _feedArticleRepository;
-        private readonly IRepository<Category> _feedCategoryRepository;
+        private readonly IRssFeedRepository _feedRepository;
+        private readonly IVideoRepository _videoRepository;
+        private readonly IArticleRepository _feedArticleRepository;
+        private readonly IRssFeedCategoryRepository _feedCategoryRepository;
         private readonly IYoutubeApiService _youTubeApiService;
         private const string YoutubeBaseUrlEmbed = "https://www.youtube.com/embed/";
 
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RssFeedAdminService(IUnitOfWork unitOfWork, IRepository<RssFeed> feedRepository,
-            IRepository<Article> feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper,
-            IRepository<Category> feedCategoryRepository, IYoutubeApiService youTubeService, IRepository<Video> videoRepository)
+        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository,
+            IArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper,
+            IRssFeedCategoryRepository feedCategoryRepository, IYoutubeApiService youTubeService, IVideoRepository videoRepository)
 
         {
             _unitOfWork = unitOfWork;

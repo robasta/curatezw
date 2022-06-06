@@ -6,19 +6,20 @@ using Curate.Data.Models;
 using Curate.Data.Repositories.Interfaces;
 using Curate.Data.Services.Interfaces;
 using Curate.Data.Utils;
+using Curate.Data.ViewModels;
 using Curate.Data.ViewModels.Article;
 
 namespace Curate.Data.Services
 {
     public class VideoService: IVideoService
     {
-        private readonly IRepository<Video> _videoRepository;
-        private readonly IRepository<Article> _articleRepository;
+        private readonly IVideoRepository _videoRepository;
+        private readonly IArticleRepository _articleRepository;
         private readonly ITagService _tagService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public VideoService(IRepository<Video> videoRepository, IUnitOfWork unitOfWork, IRepository<Article> articleRepository, IMapper mapper, ITagService tagService)
+        public VideoService(IVideoRepository videoRepository, IUnitOfWork unitOfWork, IArticleRepository articleRepository, IMapper mapper, ITagService tagService)
         {
             _videoRepository = videoRepository;
             _unitOfWork = unitOfWork;

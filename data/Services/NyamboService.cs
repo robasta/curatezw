@@ -13,10 +13,10 @@ namespace Curate.Data.Services
     public class NyamboService:INyamboService
     {
 
-        private readonly IRepository<Post> _postRepository;
-        private readonly IRepository<Tag> _tagRepository;
+        private readonly IPostRepository _postRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public NyamboService(IRepository<Post> postRepository, IRepository<Tag> tagRepository)
+        public NyamboService(IPostRepository postRepository, ITagRepository tagRepository)
         {
             _postRepository = postRepository;
             _tagRepository = tagRepository;
