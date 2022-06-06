@@ -6,7 +6,7 @@ using Curate.Data.Base;
 using Curate.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Curate.Data
+namespace Curate.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

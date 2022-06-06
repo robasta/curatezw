@@ -9,10 +9,10 @@ namespace Curate.Data.Services
 {
     public class TagService: ITagService
     {
-        private readonly ITagRepository _tagRepository;
+        private readonly IRepository<Tag> _tagRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public TagService(ITagRepository tagRepository, IUnitOfWork unitOfWork)
+        public TagService(IRepository<Tag> tagRepository, IUnitOfWork unitOfWork)
         {
             _tagRepository = tagRepository;
             _unitOfWork = unitOfWork;

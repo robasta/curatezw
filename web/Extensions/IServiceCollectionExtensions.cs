@@ -34,15 +34,7 @@ namespace Curate.Web.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
-                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
-                .AddScoped<IRssFeedRepository, RssFeedRepository>()
-                .AddScoped<IArticleRepository, ArticleRepository>()
-                .AddScoped< IRssFeedCategoryRepository, RssFeedCategoryRepository>()
-                .AddScoped<IPostRepository, PostRepository>()
-                .AddScoped<IVideoRepository, VideoRepository>()
-                .AddScoped<IVideoChannelRepository, VideoChannelRepository>()
-                .AddScoped<ITagRepository, TagRepository>()
-                .AddScoped<IVideoPlaylistRepository,VideoPlaylistRepository>();
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
