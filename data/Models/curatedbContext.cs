@@ -51,8 +51,6 @@ namespace Curate.Data.Models
             {
                 entity.ToTable("Article");
 
-                entity.Property(e => e.Blurb);
-
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.PublishDate).HasColumnType("datetime");
