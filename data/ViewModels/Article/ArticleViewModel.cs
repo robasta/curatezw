@@ -18,8 +18,10 @@ namespace Curate.Data.ViewModels.Article
         public DateTime? LastModifiedDate { get; set; }
         public DateTime? PublishDate { get; set; }
         public List<TagArticle> TagsArticles { get; set; }
+        public List<CollectionArticle> CollectionArticles { get; set; }
         public  int FeedId { get; set; }
         public string TagList { get; set; }
+        public string CollectionList { get; set; }
         public VideoViewModel Video { get; set; }
 
         public void SetTagList()
@@ -27,6 +29,13 @@ namespace Curate.Data.ViewModels.Article
             if (TagsArticles.Any())
             {
                 TagList = TagsArticles.Select(t => t.Tag.Title).Aggregate((tag, next) => tag + "," + next);
+            }
+        }
+        public void SetCollectionList()
+        {
+            if (CollectionArticles.Any())
+            {
+                CollectionList = CollectionArticles.Select(t => t.Collection.Title).Aggregate((collection, next) => collection + "," + next);
             }
         }
     }

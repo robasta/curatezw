@@ -5,7 +5,7 @@ namespace Curate.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DbFactory _dbFactory;
+        private readonly DbFactory _dbFactory;
 
         public UnitOfWork(DbFactory dbFactory)
         {

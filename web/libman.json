@@ -12,7 +12,7 @@
     {
       "provider": "jsdelivr",
       "library": "bootstrap@4.4.1",
-      "destination": "wwwroot/lib/bootstrap",
+      "destination": "wwwroot/lib/bootstrap"
 
     },
     {

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Curate.Data.Models;
 
 namespace Curate.Data.Services.Interfaces
@@ -7,7 +9,9 @@ namespace Curate.Data.Services.Interfaces
     {
         IEnumerable<Collection> GetCollections();
         Collection GetCollection(int id);
-        void InsertCollection(Collection collection);
-        void UpdateCollection(Collection collection);
+        IQueryable<Collection> Search(string q);
+        Task<Collection> InsertCollection(Collection collection);
+        Task<Collection> UpdateCollection(Collection collection);
+
     }
 }

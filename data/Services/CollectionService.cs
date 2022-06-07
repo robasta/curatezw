@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Curate.Data.Models;
 using Curate.Data.Repositories.Interfaces;
 using Curate.Data.Services.Interfaces;
@@ -19,7 +21,7 @@ namespace Curate.Data.Services
 
         public IEnumerable<Collection> GetCollections()
         {
-            return _collectionRepository.All("CollectionArticles");
+            return  _collectionRepository.All("CollectionArticles");
         }
 
         public Collection GetCollection(int id)
@@ -27,17 +29,25 @@ namespace Curate.Data.Services
             return _collectionRepository.GetOneByFilter(c=>c.Id == id, "CollectionArticles.Article.TagArticles.Tag");
         }
 
-        public void InsertCollection(Collection collection)
+        IQueryable<Collection> ICollectionService.Search(string q)
+        {
+            return _collectionRepository.List(s => s.Title.ToLower().Contains(q));
+        }
+
+        public async Task<Collection> InsertCollection(Collection collection)
         {
             collection.Slug = collection.Title.GenerateSlug();
             _collectionRepository.Add(collection);
-            _unitOfWork.CommitAsync();
+            var savedCount = await _unitOfWork.CommitAsync();
+            return collection;
         }
 
-        public void UpdateCollection(Collection collection)
+        public async Task<Collection> UpdateCollection(Collection collection)
         {
             _collectionRepository.Update(collection);
-            _unitOfWork.CommitAsync();
+           var savedCount = await _unitOfWork.CommitAsync();
+           return collection;
         }
+
     }
 }

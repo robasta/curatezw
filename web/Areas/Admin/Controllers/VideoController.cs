@@ -17,11 +17,9 @@ namespace Curate.Web.Areas.Admin.Controllers
     public class VideoController : Controller
     {
         private readonly IVideoService _videoService;
-        private readonly ITagService _tagService;
-        public VideoController(IVideoService videoService, ITagService tagService)
+        public VideoController(IVideoService videoService)
         {
             _videoService = videoService;
-            _tagService = tagService;
         }
 
         [HttpGet]
@@ -29,13 +27,14 @@ namespace Curate.Web.Areas.Admin.Controllers
         {
             var articleViewModel = _videoService.GetVideo(id);
             articleViewModel.SetTagList();
+            articleViewModel.SetCollectionList();;
             return View(articleViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(ArticleViewModel articleViewModel)
+        public async Task<IActionResult> Edit(ArticleViewModel articleViewModel)
         {
-            _videoService.SaveVideo(articleViewModel);
+            await _videoService.SaveVideo(articleViewModel);
             articleViewModel = _videoService.GetVideo(articleViewModel.Id);
             return RedirectToAction("Edit", new {id=articleViewModel.Id});
         }

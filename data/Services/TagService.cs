@@ -34,11 +34,11 @@ namespace Curate.Data.Services
            return _tagRepository.List(s=> s.Title.ToLower().Contains(q));
         }
 
-        public Tag SaveTag(Tag tag)
+        public async Task<Tag> SaveTag(Tag tag)
         {
             _tagRepository.Add(tag);
-            _unitOfWork.CommitAsync();
-            return tag;
+             var saveCount = await _unitOfWork.CommitAsync();
+             return tag;
         }
 
         public IQueryable<Tag> GetTags()

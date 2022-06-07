@@ -1,4 +1,5 @@
-﻿using Curate.Data.Models;
+﻿using System.Threading.Tasks;
+using Curate.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Curate.Data.Services.Interfaces;
 
@@ -27,9 +28,9 @@ namespace Curate.Web.Areas.Admin.Controllers
             return View(collection);
         }
         [HttpPost]
-        public IActionResult Add(Collection collection)
+        public async Task<IActionResult> Add(Collection collection)
         {
-            _collectionService.InsertCollection(collection);
+            await _collectionService.InsertCollection(collection);
             return RedirectToAction("Index");
         }
 

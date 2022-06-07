@@ -10,7 +10,7 @@ namespace Curate.Data.Services.Interfaces
         Task<Tag> GetTag(int id, string includeProperties);
         IQueryable<Tag> GetTags();
         IQueryable<Tag>  Search(string q);
-        Tag SaveTag(Tag tag);
+        Task<Tag> SaveTag(Tag tag);
         
     }
 }
