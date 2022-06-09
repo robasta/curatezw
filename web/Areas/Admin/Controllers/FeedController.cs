@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Curate.Data.Models;
 using Curate.Data.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +10,34 @@ namespace Curate.Web.Areas.Admin.Controllers
     [Authorize]
     public class FeedController : Controller
     {
-        private readonly IRssFeedAdminService _feedAdminService;
+        private readonly IRssFeedService _feedService;
 
-        public FeedController(IRssFeedAdminService feedAdminService)
+        public FeedController(IRssFeedService feedService)
         {
-            _feedAdminService = feedAdminService;
+            _feedService = feedService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categorizedFeeds = _feedAdminService.GetAllCategorizedFeeds();
+            var categorizedFeeds = _feedService.GetAllCategorizedFeeds();
             return View(categorizedFeeds);
         }
-        public async Task<IActionResult> EditFeed(int id)
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new RssFeed());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(RssFeed feed)
+        {
+            await _feedService.AddFeed(feed);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
             /*var feedArticle = _feedAdminService.GetFeedArticle(id);
             
@@ -38,26 +54,26 @@ namespace Curate.Web.Areas.Admin.Controllers
         [Produces("application/json")]
         public  IActionResult GetOneFeed(int feedId)
         {
-            var feed =  _feedAdminService.GetFeed(feedId);
+            var feed =  _feedService.GetFeed(feedId);
             return Ok(feed);
         }
 
         public async Task<IActionResult> ScanAll()
         {
-            var result = await _feedAdminService.ScanAllRssFeeds();
+            var result = await _feedService.ScanAllRssFeeds();
             return View(result);
         }
 
         public async Task<IActionResult> ScanOne(int feedId)
         {
             //TODO: fetch feed from db
-           var result =  await _feedAdminService.ScanOneRssFeed(feedId);
+           var result =  await _feedService.ScanOneRssFeed(feedId);
             return View(result);
         }
 
         public async Task<IActionResult> LoadOpml()
         {
-            var result = await _feedAdminService.LoadOpmlFile("feedly.opml", true);
+            var result = await _feedService.LoadOpmlFile("feedly.opml", true);
             return View(result);
         }
 

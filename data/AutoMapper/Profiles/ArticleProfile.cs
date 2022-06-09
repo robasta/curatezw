@@ -11,7 +11,7 @@ namespace Curate.Data.AutoMapper.Profiles
             CreateMap<Models.Article, ArticleViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest=> dest.Title, opt => opt.MapFrom(src=>src.Title))
-                .ForMember(dest=> dest.Blurb, opt => opt.MapFrom(src=>src.Body))
+                .ForMember(dest=> dest.Blurb, opt => opt.MapFrom(src=>src.Blurb))
                 .ForMember(dest => dest.Url, opt => opt.MapFrom(src=>src.Url))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src=>src.ImageUrl))
                 .ForMember(dest => dest.PublishDate, opt => opt.MapFrom(src => src.PublishDate))

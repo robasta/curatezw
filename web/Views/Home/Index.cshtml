@@ -1,9 +1,43 @@
-﻿
+﻿@model IEnumerable<Curate.Data.Models.Collection>
+@section Styles
+{
+    <style>
+        .card {
+            box-shadow: none;
+        }
+    </style>
+}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-           <h1>Welcome</h1>
-        </div>
-        <partial name="Asides/_VideoAside" />
-    </div>
+        @foreach (var collection in Model)
+        {
+            if (collection.CollectionArticles.Any())
+            {
+                <h2 class="border-bottom">@collection.Title</h2>
+
+                <div class="row">
+                    @foreach (var article in collection.CollectionArticles)
+                    {
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="@article.Article.Video.EmbedUrl" allowfullscreen></iframe>
+                                    </div>
+                                    <div >
+                                        <h5 class="">@article.Article.Title</h5>  
+                                    </div>
+                                    <div class="font-weight-light">
+                                        @foreach (var tag in article.Article.TagArticles)
+                                        {
+                                        <span class="badge badge-dark">@tag.Tag.Title</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        }
+ 
 </div>

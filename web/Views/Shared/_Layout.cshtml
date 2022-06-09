@@ -22,6 +22,11 @@
     
     @await Html.PartialAsync("_Styles.cshtml")
     @await RenderSectionAsync("Styles", required: false)
+    <style>
+        .content-wrapper {
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">

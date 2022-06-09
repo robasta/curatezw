@@ -21,7 +21,7 @@ namespace Curate.Data.Services
 
         public IEnumerable<Collection> GetCollections()
         {
-            return  _collectionRepository.All("CollectionArticles");
+            return  _collectionRepository.All("CollectionArticles.Article.TagArticles.Tag,CollectionArticles.Article.Video");
         }
 
         public Collection GetCollection(int id)

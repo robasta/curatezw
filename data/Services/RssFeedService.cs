@@ -19,7 +19,7 @@ using ArticleViewModel = Curate.Data.ViewModels.Article.ArticleViewModel;
 
 namespace Curate.Data.Services
 {
-    public class RssFeedAdminService : IRssFeedAdminService
+    public class RssFeedService : IRssFeedService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRssFeedRepository _feedRepository;
@@ -32,10 +32,9 @@ namespace Curate.Data.Services
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RssFeedAdminService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository,
-            IArticleRepository feedArticleRepository, ILogger<RssFeedAdminService> logger, IMapper mapper,
+        public RssFeedService(IUnitOfWork unitOfWork, IRssFeedRepository feedRepository,
+            IArticleRepository feedArticleRepository, ILogger<RssFeedService> logger, IMapper mapper,
             IRssFeedCategoryRepository feedCategoryRepository, IYoutubeApiService youTubeService, IVideoRepository videoRepository)
-
         {
             _unitOfWork = unitOfWork;
             _feedRepository = feedRepository;
@@ -138,19 +137,19 @@ namespace Curate.Data.Services
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<RssFeed> AddFeed(RssFeed feed)
+        {
+            _feedRepository.Add(feed);
+            await _unitOfWork.CommitAsync();
+            return feed;
+        }
+
         public List<CategoryViewModel> GetAllCategorizedFeeds()
         {
             var categories =
                 _feedCategoryRepository.All("SubCategories,SubCategories.RssFeeds,SubCategories.RssFeeds.Articles");
             var viewModel = _mapper.Map<List<CategoryViewModel>>(categories);
 
-            return viewModel;
-        }
-
-        public ArticleViewModel GetArticle(int id)
-        {
-            var article = _feedArticleRepository.GetOneByFilter(i => i.Id == id, "TagArticles.Tag");
-            var viewModel = _mapper.Map<ArticleViewModel>(article);
             return viewModel;
         }
 

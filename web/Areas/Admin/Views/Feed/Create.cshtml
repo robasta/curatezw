@@ -1,0 +1,89 @@
+﻿@model Curate.Data.Models.RssFeed
+
+@{
+    ViewBag.Title = "Create Feed";
+    Layout = "_Layout";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>RSS Feed</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Edit Feed</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">@Model.Title</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form asp-action="Create">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Url" class="control-label"></label>
+                            <input asp-for="Url" class="form-control" />
+                            <span asp-validation-for="Url" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageUrl" class="control-label"></label>
+                            <input asp-for="ImageUrl" class="form-control" />
+                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Blurb" class="control-label"></label>
+                            <textarea asp-for="Blurb" class="form-control"></textarea>
+                            <span asp-validation-for="Blurb" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="WebsiteUrl" class="control-label"></label>
+                            <input asp-for="WebsiteUrl" class="form-control" />
+                            <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HtmlUrl" class="control-label"></label>
+                            <input asp-for="HtmlUrl" class="form-control" />
+                            <span asp-validation-for="HtmlUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="XmlUrl" class="control-label"></label>
+                            <input asp-for="XmlUrl" class="form-control" />
+                            <span asp-validation-for="XmlUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Sub Category</label>
+                            <select class="form-control">
+                                <option>Test</option>
+                                <option>Test 2</option>
+                            </select>
+                            <span asp-validation-for="XmlUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <input type="submit" value="Submit" class="btn btn-success" id="btnSubmitPost" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
