@@ -17,6 +17,7 @@ namespace Curate.Data.Models
         public string Slug { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public int Position { get; set; }
 
         public virtual ICollection<CollectionArticle> CollectionArticles { get; set; }
     }
